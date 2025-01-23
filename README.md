@@ -1,40 +1,8 @@
-# SightStack-front-end
+# React + Vite
 
-Front End
-The front-end repository powers the interactive game interface.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Features:
-Interactive drag-and-drop game where users arrange letters into sight words.
-Ability to select a level and play the game with words from the back end.
-Responsive and user-friendly interface.
-Tech Stack:
-React: For building dynamic and interactive UI.
-CSS: For styling the webpage and ensuring a responsive design.
-HTML: For the structure of the webpage.
+Currently, two official plugins are available:
 
-Setup:
-Clone the repository:
-
-bash
-Copy
-Edit
-git clone <front-end-repo-url>
-Navigate into the project folder:
-
-bash
-Copy
-Edit
-cd sightstack-front-end
-Install dependencies:
-
-bash
-Copy
-Edit
-npm install
-Run the development server:
-
-bash
-Copy
-Edit
-npm start
-Your app should now be running at http://localhost:3000.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
