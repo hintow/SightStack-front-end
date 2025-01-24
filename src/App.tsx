@@ -1,9 +1,10 @@
 import React from 'react';
+import Home from './components/home';
 
 function App() {
   return (
     <div>
-      <h1>Welcome to AdaSpaceFun</h1>
+      <Home />
     </div>
   );
 }
