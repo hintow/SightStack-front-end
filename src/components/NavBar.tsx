@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import './NavBar.css';
+// import './NavBar.css';
 import SignUp from './SignUp'; 
 import UserInfo from './UserInfo';
 import LogIn from './LogIn';
