@@ -1,5 +1,4 @@
 
-import LogIn from './components/LogIn';
 import NavBar from './components/NavBar.tsx';
 import MianHome from './components/MainHome.tsx';
 import Background from "./components/Background.tsx";
@@ -22,8 +21,6 @@ function App() {
       <NavBar />
       <MianHome />
       <Background />
-      <LogIn />
-      hello! You are about to see a wondeful site here!!!
     </div>
   )
 }

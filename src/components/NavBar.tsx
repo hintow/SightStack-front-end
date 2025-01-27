@@ -2,10 +2,12 @@ import { FC, useState } from "react";
 import './NavBar.css';
 import SignUp from './SignUp'; 
 import UserInfo from './UserInfo';
+import LogIn from './LogIn';
 
 const NavBar: FC = () => {
   const [showSignUp, setShowSignUp] = useState(false);
   const [showUserInfo, setShowUserInfo] = useState(false);
+  const [showLogIn, setShowLogIn] = useState(false);
 
   return (
     <div>
@@ -28,11 +30,14 @@ const NavBar: FC = () => {
           <button className="signup-button" onClick={() => setShowSignUp(!showSignUp)}>
             {showSignUp ? "Hide Sign Up" : "Sign Up"}
           </button>
-          <button className="login-button">Log In</button>
+          <button className="login-button" onClick={() => setShowLogIn(!showLogIn)}>
+            {showSignUp ? "Hide Log In" : "Log In"}
+          </button>
         </div>
       </div>
       {showSignUp && <SignUp />}
       {showUserInfo && <UserInfo />}
+      {showSignUp && <LogIn />}
     </div>
   );
 };
