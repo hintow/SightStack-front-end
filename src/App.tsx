@@ -1,5 +1,6 @@
 
-import Login from './components/Login';
+import LogIn from './components/LogIn';
+import NavBar from './components/NavBar.tsx';
 // import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom';
 // imoprt Home from './components/Home';
 
@@ -16,7 +17,8 @@ import Login from './components/Login';
 function App() {
   return (
     <div>
-      <Login />
+      <NavBar />
+      <LogIn />
       hello! You are about to see a wondeful site here!!!
     </div>
   )
