@@ -3,11 +3,13 @@ import './NavBar.css';
 import SignUp from './SignUp'; 
 import UserInfo from './UserInfo';
 import LogIn from './LogIn';
+import Rules from './Rules';
 
 const NavBar: FC = () => {
   const [showSignUp, setShowSignUp] = useState(false);
   const [showUserInfo, setShowUserInfo] = useState(false);
   const [showLogIn, setShowLogIn] = useState(false);
+  const [showRules, setShowRules] = useState(false);
   
   const toggleSignUp = () => {
     setShowSignUp(!showSignUp);
@@ -17,6 +19,12 @@ const NavBar: FC = () => {
   const toggleLogIn = () => {
     setShowLogIn(!showLogIn);
     if (showSignUp) setShowSignUp(false); // Hide SignUp if LogIn is shown
+  };
+
+  const toggleRules = () => {
+    setShowRules(!showRules);
+    if (showSignUp) setShowSignUp(false); // Hide SignUp if Rules is shown
+    if (showLogIn) setShowLogIn(false); // Hide LogIn if Rules is shown
   };
 
   return (
@@ -34,7 +42,7 @@ const NavBar: FC = () => {
 
         {/* link-button */}
         <div className="nav-links">
-          <a href="#">🚀Rules</a>
+          <a href="#" onClick={toggleRules}>🚀Rules</a>
           <a href="#" onClick={() => setShowUserInfo(!showUserInfo)}>🧑‍🚀Account</a>
           {/* <button className="signup-button">Sign Up</button> */}
           {/* <button className="signup-button" onClick={() => setShowSignUp(!showSignUp)}> */}
@@ -50,6 +58,7 @@ const NavBar: FC = () => {
       {showSignUp && <SignUp />}
       {showUserInfo && <UserInfo />}
       {showLogIn && <LogIn />}
+      {showRules && <Rules />}
     </div>
   );
 };
