@@ -5,6 +5,7 @@ import Background from "./components/Background.tsx";
 function App() {
   return (
     <div>
+      
       <NavBar />
       <MianHome />
       <Background />
