@@ -1,5 +1,5 @@
 import { FC } from "react";
-import './MianHome.css';
+import './MainHome.css';
 
 
 interface Grade {
