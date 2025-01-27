@@ -44,12 +44,10 @@ const NavBar: FC = () => {
         <div className="nav-links">
           <a href="#" onClick={toggleRules}>🚀Rules</a>
           <a href="#" onClick={() => setShowUserInfo(!showUserInfo)}>🧑‍🚀Account</a>
-          {/* <button className="signup-button">Sign Up</button> */}
-          {/* <button className="signup-button" onClick={() => setShowSignUp(!showSignUp)}> */}
           <button className="signup-button" onClick={toggleSignUp}>
             {showSignUp ? "Hide Sign Up" : "Sign Up"}
           </button>
-          {/* <button className="login-button" onClick={() => setShowLogIn(!showLogIn)}> */}
+          
           <button className="login-button" onClick={toggleLogIn}>
             {showLogIn ? "Hide Log In" : "Log In"}
           </button>
