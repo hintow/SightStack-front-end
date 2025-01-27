@@ -2,6 +2,7 @@
 import LogIn from './components/LogIn';
 import NavBar from './components/NavBar.tsx';
 import MianHome from './components/MainHome.tsx';
+import Background from "./components/Background.tsx";
 // import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom';
 // imoprt Home from './components/Home';
 
@@ -20,6 +21,7 @@ function App() {
     <div>
       <NavBar />
       <MianHome />
+      <Background />
       <LogIn />
       hello! You are about to see a wondeful site here!!!
     </div>

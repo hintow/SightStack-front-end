@@ -1,0 +1,21 @@
+   /* 星星样式 */
+   .star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    animation: twinkle 15s infinite ease-in-out;
+  }
+  
+  /* 闪烁动画 */
+  @keyframes twinkle {
+    0%, 100% {
+      opacity: 0.3; /* 最暗时的亮度 */
+      transform: scale(0.8); /* 最小缩放 */
+      box-shadow: none; /* 无发光效果 */
+    }
+    50% {
+      opacity: 1; /* 最亮时的亮度 */
+      transform: scale(1.5); /* 最大缩放 */
+      box-shadow: 0 0 8px 4px rgba(255, 255, 255, 0.8); /* 发光效果 */
+    }
+  }
