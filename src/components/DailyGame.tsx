@@ -59,13 +59,8 @@ const Game: React.FC = () => {
     }
   };
 
-  const handleUndo = () => {
-    const newAnswer = [...answer];
-    const lastFilledIndex = newAnswer.lastIndexOf(draggedLetter || "");
-    if (lastFilledIndex !== -1) {
-      newAnswer[lastFilledIndex] = "";
-      setAnswer(newAnswer);
-    }
+  const handleReplay = () => {
+    setAnswer(Array(answer.length).fill(""));
   };
 
   const handleSubmit = () => {
@@ -123,7 +118,7 @@ const Game: React.FC = () => {
       </div>
 
       <div className="bottom-bar">
-        <button onClick={handleUndo}>Undo</button>
+      <button onClick={handleReplay}>Replay</button>
         <button onClick={handleSubmit}>Submit</button>
       </div>
     </div>

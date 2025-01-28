@@ -9,6 +9,8 @@
     background-color: #fff;
     color: #000;
     margin-top: 100px;
+    max-height: 80vh;
+    overflow-y: auto;
   }
   
   .section {
