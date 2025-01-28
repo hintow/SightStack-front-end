@@ -9,15 +9,15 @@ const SignUp: React.FC = () => {
   const [password, setPassword] = useState('');
 
   const avatars = [
-    'public/avatar1.jpg',
-    'public/avatar2.jpg',
-    'public/avatar3.jpg',
-    'public/avatar4.jpg',
-    'public/avatar5.jpg',
-    'public/avatar6.jpg',
-    'public/avatar7.jpg',
-    'public/avatar8.jpg',
-    'public/avatar9.jpg',
+    '/avatar1.jpg',
+    '/avatar2.jpg',
+    '/avatar3.jpg',
+    '/avatar4.jpg',
+    '/avatar5.jpg',
+    '/avatar6.jpg',
+    '/avatar7.jpg',
+    '/avatar8.jpg',
+    '/avatar9.jpg',
   ];
 
   const handleSaveProfile = () => {

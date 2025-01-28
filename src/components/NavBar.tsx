@@ -41,7 +41,7 @@ const NavBar: FC = () => {
       {/* navbar  */}
       <div className="navbar">
         {/* Logo */}
-        <img src="public/logo.png" alt="SpaceFun Logo" className="logo" />
+        <img src="/logo.png" alt="SpaceFun Logo" className="logo" />
 
         {/* link-button */}
         <div className="nav-links">

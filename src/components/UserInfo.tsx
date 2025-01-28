@@ -19,7 +19,7 @@ const UserInfo: React.FC = () => {
   // 模拟用户数据
   const user: User = {
     name: "John Doe",
-    avatar: "public/avatar9.jpg",
+    avatar: "/avatar9.jpg",
     age: 7,
     score: 10,
     achievements: ["Mercury Explorer", "Solar System Champion"]
