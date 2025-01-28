@@ -5,11 +5,13 @@ import UserInfo from './UserInfo';
 import LogIn from './LogIn';
 import Rules from './Rules';
 
+
 const NavBar: FC = () => {
   const [showSignUp, setShowSignUp] = useState(false);
   const [showUserInfo, setShowUserInfo] = useState(false);
   const [showLogIn, setShowLogIn] = useState(false);
   const [showRules, setShowRules] = useState(false);
+
   
   const toggleSignUp = () => {
     setShowSignUp(!showSignUp);
@@ -26,6 +28,7 @@ const NavBar: FC = () => {
     if (showSignUp) setShowSignUp(false); // Hide SignUp if Rules is shown
     if (showLogIn) setShowLogIn(false); // Hide LogIn if Rules is shown
   };
+
 
   return (
     <div>
@@ -46,8 +49,7 @@ const NavBar: FC = () => {
           <a href="#" onClick={() => setShowUserInfo(!showUserInfo)}>🧑‍🚀Account</a>
           <button className="signup-button" onClick={toggleSignUp}>
             {showSignUp ? "Hide Sign Up" : "Sign Up"}
-          </button>
-          
+          </button> 
           <button className="login-button" onClick={toggleLogIn}>
             {showLogIn ? "Hide Log In" : "Log In"}
           </button>

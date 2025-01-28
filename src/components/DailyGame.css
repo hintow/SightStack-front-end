@@ -1,0 +1,40 @@
+.daily-game-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .daily-game-container h2 {
+    color: #003366;
+  }
+  
+  .daily-game-container button {
+    background-color: #003366;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .daily-game-container button:hover {
+    background-color: #45a049;
+  }
+  
+  .daily-game-container ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .daily-game-container li {
+    background-color: #fff;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }

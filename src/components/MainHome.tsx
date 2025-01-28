@@ -1,5 +1,7 @@
 import { FC } from "react";
 import './MainHome.css';
+import { useNavigate } from "react-router-dom";
+
 
 
 interface Grade {
@@ -8,6 +10,7 @@ interface Grade {
 }
 
 const MianHome: FC = () => {
+  const navigate = useNavigate();
 
   const grades: Grade[] = [
     { label: "Pre-K", className: "pre-k" },
@@ -20,9 +23,15 @@ const MianHome: FC = () => {
     { label: "Grade 6+", className: "grade-6" },
   ];
 
+  const navigateToDailyGame = () => {
+    navigate('/daily-game');
+  };
+
+
+
   return (
     <div>
-      <div className="main-circle">
+      <div className="main-circle" onClick={navigateToDailyGame}>
         <span className="sun-text">Daily game</span>
       </div>
 

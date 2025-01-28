@@ -1,32 +1,39 @@
+// import NavBar from './components/NavBar.tsx';
+// import MianHome from './components/MainHome.tsx';
+// import Background from "./components/Background.tsx";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar.tsx';
-import MianHome from './components/MainHome.tsx';
+import MainHome from './components/MainHome.tsx';
 import Background from "./components/Background.tsx";
+import DailyGame from './components/DailyGame';
 
 function App() {
   return (
-    <div>
-      
-      <NavBar />
-      <MianHome />
-      <Background />
-    </div>
-  )
+    <Router>
+      <div>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<MainHome />} />
+          <Route path="/daily-game" element={<DailyGame />} />
+        </Routes>
+        <Background />
+      </div>
+    </Router>
+  );
 }
 
-export default App
-
-// import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom';
-// imoprt Home from './components/Home';
-
+export default App;
 // function App() {
 //   return (
-//     <Router>
-//       <Switch>
-//         <Route path="/" exact component={Login} />
-//         <Route path="/home" component={Home} />
-//       </Switch>
-//     </Router>
-//   );
+//     <div>
+      
+//       <NavBar />
+//       <MianHome />
+//       <Background />
+//     </div>
+//   )
 // }
+
+// export default App
 
 
