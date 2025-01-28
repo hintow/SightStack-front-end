@@ -123,6 +123,13 @@ div.hints-section {
   font-size: 18px;
 }
 
+.hint-audio-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
 /* 底部按钮区 */
 div.bottom-bar {
   display: flex;

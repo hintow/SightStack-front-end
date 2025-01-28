@@ -91,6 +91,14 @@ const Game: React.FC = () => {
     }
   };
 
+  const handlePlayHint = () => {
+    if (currentWord) {
+      const utterance = new SpeechSynthesisUtterance(currentWord.hint);
+      utterance.lang = 'en-US';
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
   const goBackToHome = () => {
     navigate('/'); // 使用 navigate 跳转到主页
   };
@@ -132,7 +140,14 @@ const Game: React.FC = () => {
             </div>
 
             <button onClick={() => setShowHint(true)}>Show Hint</button>
-            {showHint && <p className="hints-section">Hint: {currentWord.hint}</p>}
+            {showHint && (
+              <div className="hints-section">
+                <p>Hint: {currentWord.hint}</p>
+                <button onClick={handlePlayHint} className="hint-audio-button">
+                  🔊
+                </button>
+              </div>
+            )}
           </>
         )}
       </div>
