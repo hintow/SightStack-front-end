@@ -27,6 +27,7 @@ const wordLibrary: Word[] = [
 const Game: React.FC = () => {
   const navigate = useNavigate();
   const [currentWord, setCurrentWord] = useState<Word | null>(null);
+  const [shuffledWord, setShuffledWord] = useState<string[]>([]);
   const [draggedLetter, setDraggedLetter] = useState<string | null>(null);
   const [answer, setAnswer] = useState<string[]>([]);
   const [showHint, setShowHint] = useState(false);
@@ -37,14 +38,20 @@ const Game: React.FC = () => {
     setCurrentWord(randomWord);
     
     // 打乱字母顺序
-    const shuffledWord = randomWord.word
-      .split('')                          // 将单词拆分成字母数组
-      .sort(() => Math.random() - 0.5)     // 使用 Math.random() 随机打乱字母顺序
-      .join('');                           // 将字母数组重新合并成一个字符串
+    const shuffled = shuffleArray(randomWord.word.split(''));
+    setShuffledWord(shuffled);
     
     // 初始化答案，确保答案的长度与打乱后的单词相同
-    setAnswer(Array(shuffledWord.length).fill(""));
-    setShowHint(false);                   // 关闭提示
+    setAnswer(Array(shuffled.length).fill(""));
+    setShowHint(false); // 关闭提示
+  };
+
+  const shuffleArray = (array: string[]) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
   };
 
   const handleDragStart = (letter: string) => {
@@ -72,7 +79,7 @@ const Game: React.FC = () => {
   };
 
   const goBackToHome = () => {
-    navigate('/');  // 使用 navigate 跳转到主页
+    navigate('/'); // 使用 navigate 跳转到主页
   };
 
   return (
@@ -86,7 +93,7 @@ const Game: React.FC = () => {
         {currentWord && (
           <>
             <div id="puzzle">
-              {currentWord.word.split("").map((letter, index) => (
+              {shuffledWord.map((letter, index) => (
                 <div
                   key={index}
                   className="draggable"
@@ -118,7 +125,7 @@ const Game: React.FC = () => {
       </div>
 
       <div className="bottom-bar">
-      <button onClick={handleReplay}>Replay</button>
+        <button onClick={handleReplay}>Replay</button>
         <button onClick={handleSubmit}>Submit</button>
       </div>
     </div>
