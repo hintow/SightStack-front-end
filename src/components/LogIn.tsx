@@ -4,7 +4,6 @@ import './LogIn.css';
 const LogIn: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const [showForm, setShowForm] = useState(false);
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
@@ -13,13 +12,9 @@ const LogIn: React.FC = () => {
         console.log('Password:', password);
     };
 
-    // const toggleForm = () => {
-    //     setShowForm(!showForm);
-    // };
-
     return (
         <div className="login-container">
-            <h1 style={{ textAlign: 'center', color: 'white' }}>Login</h1>
+            <h1>Log in</h1>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="email">Email:</label>
