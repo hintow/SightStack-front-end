@@ -155,7 +155,6 @@ body::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('https://i.imgur.com/T6hnLDz.jpg') no-repeat center center/cover; /* 使用亮丽的背景图片 */
   opacity: 0.2;
   z-index: -1;
 }
