@@ -10,6 +10,7 @@ body {
     text-align: center;
     overflow: hidden;
     position: relative;
+    justify-content: center;
   }
   
   /* 顶部导航栏样式 */

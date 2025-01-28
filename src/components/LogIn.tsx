@@ -19,7 +19,7 @@ const LogIn: React.FC = () => {
 
     return (
         <div className="login-container">
-            <h1 style={{ textAlign: 'center' }}>Login</h1>
+            <h1 style={{ textAlign: 'center', color: 'white' }}>Login</h1>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="email">Email:</label>
