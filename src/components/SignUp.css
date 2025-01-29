@@ -1,55 +1,51 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  color: #000;
+  margin-top: 100px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
 
-  .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    color: #000;
-    margin-top: 100px;
-    max-height: 80vh;
-    overflow-y: auto;
-  }
-  
-  .section {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  input,
-  button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .avatar {
-    display: inline-block;
-    margin: 5px;
-    cursor: pointer;
-  }
-  
-  .avatar img {
-    width: 50px;
-    height: 50px;
-    border: 2px solid transparent;
-    border-radius: 50%;
-  }
-  
-  .avatar img.selected {
-    border-color: blue;
-  }
+.section {
+  margin-bottom: 20px;
+}
 
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input,
+button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.avatar {
+  display: inline-block;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.avatar img {
+  width: 50px;
+  height: 50px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+}
+
+.avatar img.selected {
+  border-color: blue;
 }
 
 .avatar {
@@ -71,7 +67,7 @@
 
 /* SignUp 按钮样式 */
 .signup-container h1 {
-  color: #000; 
+  color: #000;
 }
 
 .form-group {
