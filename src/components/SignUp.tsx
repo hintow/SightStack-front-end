@@ -9,6 +9,7 @@ const SignUp: React.FC = () => {
   const [password, setPassword] = useState('');
 
   const avatars = [
+    '/avatar0.jpg',
     '/avatar1.jpg',
     '/avatar2.jpg',
     '/avatar3.jpg',
@@ -51,7 +52,10 @@ const SignUp: React.FC = () => {
           id="child-age"
           placeholder="Enter child's age"
           value={childAge}
-          onChange={(e) => setChildAge(Number(e.target.value) || '')}
+          onChange={(e) => {
+            const age = Number(e.target.value);
+            setChildAge(age >= 0 ? age : 0);
+          }}
         />
       </div>
 
@@ -94,7 +98,7 @@ const SignUp: React.FC = () => {
         </div>
       </div>
 
-      <button onClick={handleSaveProfile}>Save Profile</button>
+      <button className="save-profile-button" onClick={handleSaveProfile}>Save Profile</button>
     </div>
   );
 };

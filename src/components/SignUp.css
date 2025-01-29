@@ -48,3 +48,70 @@
   .avatar img.selected {
     border-color: blue;
   }
+
+  border-radius: 5px;
+}
+
+.avatar {
+  display: inline-block;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.avatar img {
+  width: 50px;
+  height: 50px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+}
+
+.avatar img.selected {
+  border-color: blue;
+}
+
+/* SignUp 按钮样式 */
+.signup-container h1 {
+  color: #000; 
+}
+
+.form-group {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input,
+button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+input:focus {
+  border-color: #4CAF50;
+  outline: none;
+}
+
+button[type="submit"],
+button.save-profile-button {
+  background-color: #003366;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button[type="submit"]:hover,
+button.save-profile-button:hover {
+  background-color: #45a049;
+}
