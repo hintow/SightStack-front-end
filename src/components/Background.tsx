@@ -37,7 +37,7 @@ const SpaceBackground: React.FC = () => {
     generateStars();
   }, []); // 仅在组件挂载时运行
 
-  return <div className="space-background">{stars}</div>;
+  return <div className="background">{stars}</div>;
 };
 
 export default SpaceBackground;
