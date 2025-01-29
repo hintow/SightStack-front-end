@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar.tsx';
 import MainHome from './components/MainHome.tsx';
 import Background from "./components/Background.tsx";
-import DailyGame from './components/DailyGame';
+import Game from './components/Game.tsx';
 
 function App() {
   return (
@@ -14,7 +14,8 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<MainHome />} />
-          <Route path="/daily-game" element={<DailyGame />} />
+          <Route path="/daily-game" element={<Game />} />
+          <Route path="/game/:grade" element={<Game />} /> 
         </Routes>
         <Background />
       </div>

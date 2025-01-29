@@ -111,6 +111,24 @@ div.placeholder:hover {
   border-color: white;
 }
 
+/* Show Hint 按钮样式 */
+button.show-hint-button {
+  background: #0066cc; /* 浅蓝色背景 */
+  border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
+  color: white; /* 白色文字 */
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+button.show-hint-button:hover {
+  background: #003366; /* 深蓝色背景 */
+  transform: scale(1.1);
+}
+
 /* 提示区域 */
 div.hints-section {
   margin-top: 20px;

@@ -27,18 +27,25 @@ const MianHome: FC = () => {
     navigate('/daily-game');
   };
 
+  const navigateToGame = (grade: string) => {
+    navigate(`/game/${grade}`);  // 跳转到相应年级的游戏页面
+  };
 
 
   return (
     <div>
       <div className="main-circle" onClick={navigateToDailyGame}>
-        <span className="sun-text">Daily game</span>
+        <span className="sun-text">Daily Game</span>
       </div>
 
       <div className="grade-container">
         {grades.map((grade, index) => (
-          <div key={index} className={`grade-circle ${grade.className}`}>
-            {grade.label}
+          <div
+          key={index}
+          className={`grade-circle ${grade.className}`}
+          onClick={() => navigateToGame(grade.className)}  // 跳转到对应年级的游戏页面
+        >
+          {grade.label}
           </div>
         ))}
       </div>
