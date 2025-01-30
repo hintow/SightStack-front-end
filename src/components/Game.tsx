@@ -37,7 +37,68 @@ const wordLibrary: Word[] = [
   { word: "music", hint: "Sounds that are sung or played and that people enjoy", level: "2nd grade" } 
 ];
 
-const Game: React.FC = () => {
+interface GameProps {
+  type: 'daily' | 'grade';
+  grade?: string;
+}
+
+const gradeToLevel = (grade: string): string => {
+  switch (grade) {
+    case 'pre-k':
+      return 'prek';
+    case 'grade-k':
+      return 'k';
+    case 'grade-1':
+      return '1st';
+    case 'grade-2':
+      return '2nd';
+    case 'grade-3':
+      return '3rd';
+    case 'grade-4':
+      return '4th';
+    case 'grade-5':
+      return '5th';
+    case 'grade-6':
+      return '6th';
+    default:
+      return 'prek'; // Default to prek if invalid grade
+  }
+};
+
+const fetchOptions = {
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json'
+  }
+};
+
+const apiServer = 'http://127.0.0.1:5000';
+
+const fetchDailyWord = async (): Promise<Word> => {
+  try {
+    const response = await fetch(`${apiServer}/words/daily`, fetchOptions);
+    if (!response.ok) {
+      throw new Error('Failed to fetch daily word');
+    }
+    return await response.json();
+  } catch (err) {
+    throw new Error('Error fetching daily word: ' + err);
+  }
+};
+
+const fetchWordByLevel = async (level: string): Promise<Word> => {
+  try {
+    const response = await fetch(`${apiServer}/words/level/${level}`, fetchOptions);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch word for level ${level}`);
+    }
+    return await response.json();
+  } catch (err) {
+    throw new Error('Error fetching word: ' + err);
+  }
+};
+
+const Game: React.FC<GameProps>  = ({ type, grade }) => {
   const navigate = useNavigate();
   const [currentWord, setCurrentWord] = useState<Word | null>(null);
   const [shuffledWord, setShuffledWord] = useState<string[]>([]);
@@ -45,18 +106,27 @@ const Game: React.FC = () => {
   const [answer, setAnswer] = useState<string[]>([]);
   const [showHint, setShowHint] = useState(false);
 
-  const startGame = () => {
-    // 从单词库中随机选择一个单词
-    const randomWord = wordLibrary[Math.floor(Math.random() * wordLibrary.length)];
-    setCurrentWord(randomWord);
-    
-    // 打乱字母顺序
-    const shuffled = shuffleArray(randomWord.word.split(''));
-    setShuffledWord(shuffled);
-    
-    // 初始化答案，确保答案的长度与打乱后的单词相同
-    setAnswer(Array(shuffled.length).fill(""));
-    setShowHint(false); // 关闭提示
+  const startGame = async () => {
+    try {
+      let randomWord: Word;
+      
+      if (type === 'daily') {
+        randomWord = await fetchDailyWord();
+      } else if (grade) {
+        const level = gradeToLevel(grade);
+        randomWord = await fetchWordByLevel(level);
+      } else {
+        throw new Error('Grade level is required for grade-specific games');
+      }
+
+      setCurrentWord(randomWord);
+      const shuffled = shuffleArray(randomWord.word.split(''));
+      setShuffledWord(shuffled);
+      setAnswer(Array(shuffled.length).fill(""));
+      setShowHint(false);
+    } catch (err) {
+      console.error('Failed to start game:', err);
+    }
   };
 
   const shuffleArray = (array: string[]) => {
