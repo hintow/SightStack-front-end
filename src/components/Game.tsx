@@ -8,35 +8,6 @@ interface Word {
   level: string;
 }
 
-const wordLibrary: Word[] = [
-  { word: "and", hint: "Used to connect words or phrases", level: "prek" },
-  { word: "away", hint: "At a distance from a place or person", level: "prek" },
-  { word: "big", hint: "Large in size", level: "prek" },
-  { word: "cat", hint: "A small domesticated carnivorous mammal", level: "prek" },
-  { word: "dog", hint: "A domesticated carnivorous mammal, often kept as a pet", level: "prek" },
-  { word: "sun", hint: "The star at the center of our solar system", level: "prek" },
-  { word: "book", hint: "A set of written, printed, or blank pages", level: "prek" },
-  { word: "tree", hint: "A woody perennial plant, typically having a single stem or trunk", level: "prek" },
-  { word: "fish", hint: "A limbless cold-blooded vertebrate animal with gills", level: "prek" },
-  { word: "moon", hint: "The natural satellite of the Earth", level: "prek" },
-  { word: "star", hint: "A luminous point in the night sky", level: "prek" },
-  { word: "ball", hint: "A spherical object used in games and sports", level: "prek" },
-  { word: "bird", hint: "A warm-blooded egg-laying vertebrate animal with wings", level: "prek" },
-  { word: "school", hint: "A place where children go to learn", level: "2nd grade" },
-  { word: "family", hint: "A group of people related by blood or marriage", level: "2nd grade" },
-  { word: "friend", hint: "A person you like and trust", level: "2nd grade" },
-  { word: "water", hint: "A clear liquid that all living things need to survive", level: "2nd grade" },
-  { word: "happy", hint: "Feeling or showing pleasure or joy", level: "2nd grade" },
-  { word: "light", hint: "Something that makes things visible or bright", level: "2nd grade" },
-  { word: "apple", hint: "A round fruit that is red, green, or yellow", level: "2nd grade" },
-  { word: "paper", hint: "Material used for writing or drawing on", level: "2nd grade" },
-  { word: "plant", hint: "A living thing that grows in soil and has leaves and roots", level: "2nd grade" },
-  { word: "house", hint: "A building where people live", level: "2nd grade" },
-  { word: "tiger", hint: "A large wild cat with orange fur and black stripes", level: "2nd grade" },
-  { word: "clock", hint: "A device that shows the time", level: "2nd grade" },
-  { word: "music", hint: "Sounds that are sung or played and that people enjoy", level: "2nd grade" } 
-];
-
 interface GameProps {
   type: 'daily' | 'grade';
   grade?: string;
@@ -231,3 +202,35 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
 };
 
 export default Game;
+
+
+
+//  local wordLibrary
+// const wordLibrary: Word[] = [
+//   { word: "and", hint: "Used to connect words or phrases", level: "prek" },
+//   { word: "away", hint: "At a distance from a place or person", level: "prek" },
+//   { word: "big", hint: "Large in size", level: "prek" },
+//   { word: "cat", hint: "A small domesticated carnivorous mammal", level: "prek" },
+//   { word: "dog", hint: "A domesticated carnivorous mammal, often kept as a pet", level: "prek" },
+//   { word: "sun", hint: "The star at the center of our solar system", level: "prek" },
+//   { word: "book", hint: "A set of written, printed, or blank pages", level: "prek" },
+//   { word: "tree", hint: "A woody perennial plant, typically having a single stem or trunk", level: "prek" },
+//   { word: "fish", hint: "A limbless cold-blooded vertebrate animal with gills", level: "prek" },
+//   { word: "moon", hint: "The natural satellite of the Earth", level: "prek" },
+//   { word: "star", hint: "A luminous point in the night sky", level: "prek" },
+//   { word: "ball", hint: "A spherical object used in games and sports", level: "prek" },
+//   { word: "bird", hint: "A warm-blooded egg-laying vertebrate animal with wings", level: "prek" },
+//   { word: "school", hint: "A place where children go to learn", level: "2nd grade" },
+//   { word: "family", hint: "A group of people related by blood or marriage", level: "2nd grade" },
+//   { word: "friend", hint: "A person you like and trust", level: "2nd grade" },
+//   { word: "water", hint: "A clear liquid that all living things need to survive", level: "2nd grade" },
+//   { word: "happy", hint: "Feeling or showing pleasure or joy", level: "2nd grade" },
+//   { word: "light", hint: "Something that makes things visible or bright", level: "2nd grade" },
+//   { word: "apple", hint: "A round fruit that is red, green, or yellow", level: "2nd grade" },
+//   { word: "paper", hint: "Material used for writing or drawing on", level: "2nd grade" },
+//   { word: "plant", hint: "A living thing that grows in soil and has leaves and roots", level: "2nd grade" },
+//   { word: "house", hint: "A building where people live", level: "2nd grade" },
+//   { word: "tiger", hint: "A large wild cat with orange fur and black stripes", level: "2nd grade" },
+//   { word: "clock", hint: "A device that shows the time", level: "2nd grade" },
+//   { word: "music", hint: "Sounds that are sung or played and that people enjoy", level: "2nd grade" } 
+// ];
