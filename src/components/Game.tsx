@@ -80,6 +80,7 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
   const [showHint, setShowHint] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
+  const [isCompleted, setIsCompleted] = useState(false);
 
   const startGame = async () => {
     try {
@@ -130,11 +131,25 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
 
   const handleSubmit = () => {
     if (currentWord && answer.join("") === currentWord.word) {
+      setIsCompleted(true);
       setPopupMessage("Correct!");
+      setIsPopupOpen(true);
+      // Auto start new game after delay
+      setTimeout(() => {
+        startGame();
+        setIsCompleted(false);
+        setIsPopupOpen(false);
+      }, 2000);
     } else {
       setPopupMessage("Try again!");
+      setIsPopupOpen(true);
+      // replay game after delay
+      setTimeout(() => {
+        handleReplay();
+        setIsCompleted(false);
+        setIsPopupOpen(false);
+      }, 2000);
     }
-    setIsPopupOpen(true);
   };
 
   const closePopup = () => {
@@ -156,8 +171,12 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
   return (
     <div className="game">
       <div className="top-bar">
-        <button onClick={startGame}>Play</button>
-        <button className="return-button" onClick={goBackToHome}>Exit</button>
+        <button onClick={startGame}>
+          {isCompleted ? "New Game" : "Play"}
+        </button>
+        <button className="return-button" onClick={goBackToHome}>
+          Exit
+        </button>
       </div>
 
       <div className="main-area">
