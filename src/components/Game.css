@@ -41,6 +41,17 @@ div.top-bar button:hover {
   transform: scale(1.1);
 }
 
+/* Score display */
+.score-display {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #003366;
+  font-weight: bold;
+  font-size: 18px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 /* 主内容区域 */
 div.main-area {
   flex: 1;

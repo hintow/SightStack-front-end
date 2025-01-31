@@ -13,7 +13,6 @@ interface GameProps {
   type: 'daily' | 'grade';
   grade?: string;
 }
-
 const gradeToLevel = (grade: string): string => {
   switch (grade) {
     case 'pre-k':
@@ -81,6 +80,7 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
   const [isCompleted, setIsCompleted] = useState(false);
+  const [score, setScore] = useState(0);// add score state
 
   const startGame = async () => {
     try {
@@ -131,6 +131,7 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
 
   const handleSubmit = () => {
     if (currentWord && answer.join("") === currentWord.word) {
+      setScore(prev => prev + 1); // increment score
       setIsCompleted(true);
       setPopupMessage("Correct!");
       setIsPopupOpen(true);
@@ -174,6 +175,11 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
         <button onClick={startGame}>
           {isCompleted ? "New Game" : "Play"}
         </button>
+
+        <div className="score-display">
+          Score: {score}
+        </div>
+
         <button className="return-button" onClick={goBackToHome}>
           Exit
         </button>
