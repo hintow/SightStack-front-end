@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Popup from './Popup';
 import './Game.css';
 
 interface Word {
@@ -76,6 +77,8 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
   const [draggedLetter, setDraggedLetter] = useState<string | null>(null);
   const [answer, setAnswer] = useState<string[]>([]);
   const [showHint, setShowHint] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
 
   const startGame = async () => {
     try {
@@ -126,10 +129,15 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
 
   const handleSubmit = () => {
     if (currentWord && answer.join("") === currentWord.word) {
-      alert("Correct!");
+      setPopupMessage("Correct!");
     } else {
-      alert("Try again!");
+      setPopupMessage("Try again!");
     }
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
   };
 
   const handlePlayHint = () => {
@@ -196,6 +204,7 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
       <div className="bottom-bar">
         <button onClick={handleReplay}>Replay</button>
         <button onClick={handleSubmit}>Submit</button>
+        <Popup isOpen={isPopupOpen} onClose={closePopup} message={popupMessage} />
       </div>
     </div>
   );
