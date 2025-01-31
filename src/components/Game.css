@@ -22,18 +22,23 @@ div.top-bar {
   border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   font-size: 18px;
+  gap: 20px;
 }
 
 div.top-bar button {
-  background: #0066cc; /* 修改为较浅的蓝色 */
+  background: #0066cc;
   border: none;
-  padding: 12px 25px;
+  padding: 12px 25px; /* 统一按钮的内边距 */
   border-radius: 10px;
   color: white;
   cursor: pointer;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 16px; /* 统一字体大小 */
   transition: all 0.3s ease-in-out;
+  height: 48px; /* 固定按钮高度，确保与 score-display 一致 */
+  display: flex;
+  align-items: center; /* 文字垂直居中 */
+  justify-content: center; /* 文字水平居中 */
 }
 
 div.top-bar button:hover {
@@ -44,12 +49,16 @@ div.top-bar button:hover {
 /* Score display */
 .score-display {
   background: rgba(255, 255, 255, 0.7);
-  padding: 10px 20px;
+  padding: 12px 20px; /* 调整内边距，使其与按钮高度一致 */
   border-radius: 10px;
   color: #003366;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 18px; /* 统一字体大小 */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  height: 32px; /* 固定高度，确保与按钮一致 */
+  display: flex;
+  align-items: center; /* 文字垂直居中 */
+  justify-content: center; /* 文字水平居中 */
 }
 
 /* 主内容区域 */
