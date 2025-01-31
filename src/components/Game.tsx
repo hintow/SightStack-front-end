@@ -150,7 +150,7 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
   };
 
   const goBackToHome = () => {
-    navigate('/'); // 使用 navigate 跳转到主页
+    navigate('/'); // Navigate back to home page
   };
 
   return (
@@ -189,7 +189,9 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
               ))}
             </div>
 
-            <button className="show-hint-button" onClick={() => setShowHint(true)}>Show Hint</button>
+            <button className="show-hint-button" onClick={() => setShowHint(!showHint)}>
+              {showHint ? "Hide Hint" : "Show Hint"}
+            </button>
             {showHint && (
               <div className="hints-section">
                 <p>Hint: {currentWord.hint}</p>

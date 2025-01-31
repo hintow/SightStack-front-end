@@ -32,12 +32,6 @@ const NavBar: FC = () => {
 
   return (
     <div>
-      {/*  background */}
-      <div
-        className="space-background"
-        style={{ backgroundImage: "url('public/space-background.jpg')" }}
-      ></div>
-
       {/* navbar  */}
       <div className="navbar">
         {/* Logo */}

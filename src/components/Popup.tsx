@@ -13,7 +13,7 @@ const Popup : React.FC<PopupProps > = ({ isOpen, onClose, message }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <p>{message}</p>
+        <p className="popup-message">{message}</p>
         <button onClick={onClose}>Close</button>
       </div>
     </div>
