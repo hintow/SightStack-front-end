@@ -8,7 +8,6 @@ interface Word {
   level: string;
 }
 
-
 interface GameProps {
   type: 'daily' | 'grade';
   grade?: string;
@@ -44,7 +43,8 @@ const fetchOptions = {
   }
 };
 
-const apiServer = 'http://127.0.0.1:5000';
+// const apiServer = 'http://127.0.0.1:5000';
+const apiServer = 'https://sightstack-back-end.onrender.com';
 
 const fetchDailyWord = async (): Promise<Word> => {
   try {
