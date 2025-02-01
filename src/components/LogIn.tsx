@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './LogIn.css';
 import Popup from './Popup';
 
@@ -7,6 +8,7 @@ const LogIn: React.FC = () => {
     const [password, setPassword] = useState('');
     const [isPopupOpen, setIsPopupOpen] = useState(false); // 控制 Popup 显示
     const [popupMessage, setPopupMessage] = useState(''); // 存储 Popup 的消息
+    const navigate = useNavigate();
 
     const handleClose = () => {
         document.dispatchEvent(new CustomEvent('toggleLogIn'));
@@ -32,8 +34,13 @@ const LogIn: React.FC = () => {
                 console.log('Login successful:', data);
                 localStorage.setItem('userId', data.userId); 
                 setPopupMessage('Login successful!'); // 设置成功消息
-                setIsPopupOpen(true); // 打开 Popup
-                // 在这里处理登录成功后的逻辑，比如跳转到用户主页
+                setIsPopupOpen(true); 
+
+                // 延迟跳转，等用户看到弹窗后
+                setTimeout(() => {
+                    document.dispatchEvent(new CustomEvent('toggleLogIn'));
+                    navigate('/'); 
+                }, 2000); // 2秒后跳转
             } else {
                 const errorData = await response.json();
                 console.error('Login failed:', errorData.error);
@@ -87,41 +94,3 @@ const LogIn: React.FC = () => {
 };
 
 export default LogIn;
-
-//     return (
-//         <div className="login-container">
-//             <button onClick={toggleForm}>
-//             ready to play? log in here!
-//             </button>
-//             {showForm && (
-
-//                 <div>
-//                     <h2>Login</h2>
-//                     <form onSubmit={handleSubmit}>
-//                         <div className="form-group">
-//                             <label htmlFor="email">Email:</label>
-//                             <input
-//                                 type="email"
-//                                 id="email"
-//                                 value={email}
-//                                 onChange={(e) => setEmail(e.target.value)}
-//                             />
-//                         </div>
-//                         <div className="form-group">
-//                             <label htmlFor="password">Password:</label>
-//                             <input
-//                                 type="password"
-//                                 id="password"
-//                                 value={password}
-//                                 onChange={(e) => setPassword(e.target.value)}
-//                             />
-//                         </div>
-//                         <button type="submit">Login</button>
-//                     </form>
-//                 </div>
-//             )}
-//         </div>
-//     );
-// };
-
-// export default Login;

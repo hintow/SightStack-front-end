@@ -32,12 +32,46 @@ const SignUp: React.FC = () => {
     '/avatar9.jpg',
   ];
 
+  const validatePassword = (password: string) => {
+    return password.length >= 6; 
+  };
+
+  const validateEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const validateAge = (age: number) => {
+    return age >= 3 && age <= 12; 
+  };
+   
+
   const handleSaveProfile = async () => {
     if (!childName || !childAge || !selectedAvatar || !email || !password) {
       alert('Please fill out all fields and select an avatar!');
       return;
     }
-  
+
+      // Validate email format
+    if (!validateEmail(email)) {
+      setPopupMessage('Please enter a valid email address');
+      setIsPopupOpen(true);
+      return;
+    }
+
+    // Validate password length
+    if (!validatePassword(password)) {
+      setPopupMessage('Password must be at least 6 characters long');
+      setIsPopupOpen(true);
+      return;
+    }
+
+    // Validate age range
+    if (!validateAge(Number(childAge))) {
+      setPopupMessage('Child age must be between 3 and 12 years');
+      setIsPopupOpen(true);
+      return;
+    }
+ 
     try {
       const response = await axios.post('http://localhost:5000/register', {
         childName,
@@ -53,8 +87,8 @@ const SignUp: React.FC = () => {
 
         // 延迟跳转，等用户看到弹窗后
         setTimeout(() => {
-          setIsPopupOpen(false);
-          navigate('/'); //doesn't work here
+          document.dispatchEvent(new CustomEvent('toggleSignUp'));
+          navigate('/'); 
         }, 2000); // 2秒后跳转
       }
     } catch (error) {
