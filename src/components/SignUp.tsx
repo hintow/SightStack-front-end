@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import './SignUp.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Popup from './Popup';
 
 const SignUp: React.FC = () => {
   const [childName, setChildName] = useState('');
@@ -7,6 +10,9 @@ const SignUp: React.FC = () => {
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); 
+  const [popupMessage, setPopupMessage] = useState<string>(''); // 控制弹窗消息
+  const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false); // 控制弹窗显示
 
   const avatars = [
     '/avatar0.jpg',
@@ -21,13 +27,36 @@ const SignUp: React.FC = () => {
     '/avatar9.jpg',
   ];
 
-  const handleSaveProfile = () => {
+  const handleSaveProfile = async () => {
     if (!childName || !childAge || !selectedAvatar || !email || !password) {
       alert('Please fill out all fields and select an avatar!');
       return;
     }
+  
+    try {
+      const response = await axios.post('http://localhost:5000/register', {
+        childName,
+        childAge,
+        email,
+        password, // 注意：在生产环境中，密码应该在发送前进行哈希处理
+        avatar: selectedAvatar,
+      });
+  
+      if (response.status === 201) {
+        setPopupMessage('Profile saved successfully!');
+        setIsPopupOpen(true);
 
-    alert(`Profile saved!\nName: ${childName}\nAge: ${childAge}\nAvatar: ${selectedAvatar}\nEmail: ${email}`);
+        // 延迟跳转，等用户看到弹窗后
+        setTimeout(() => {
+          setIsPopupOpen(false);
+          navigate('/'); //doesn't work here
+        }, 2000); // 2秒后跳转
+      }
+    } catch (error) {
+      console.error('Error saving profile:', error);
+      setPopupMessage('Failed to save profile. Please try again.');
+      setIsPopupOpen(true);
+    }
   };
 
   return (
@@ -99,6 +128,12 @@ const SignUp: React.FC = () => {
       </div>
 
       <button className="save-profile-button" onClick={handleSaveProfile}>Save Profile</button>
+          {/* Popup 组件 */}
+          <Popup 
+        isOpen={isPopupOpen} 
+        onClose={() => setIsPopupOpen(false)} 
+        message={popupMessage} 
+      />
     </div>
   );
 };

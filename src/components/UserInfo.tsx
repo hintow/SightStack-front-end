@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react'; 
+import { useNavigate } from 'react-router-dom';
 import './UserInfo.css';
 
 interface Achievement {
@@ -15,15 +16,12 @@ interface User {
   achievements: string[];
 }
 
+
 const UserInfo: React.FC = () => {
-  // 模拟用户数据
-  const user: User = {
-    name: "John Doe",
-    avatar: "/avatar9.jpg",
-    age: 7,
-    score: 10,
-    achievements: ["🌑 Mercury Explorer", "🏆 Solar System Champion"]
-  };
+  const [user, setUser] = useState<User | null>(null); // 存储从后端获取的用户信息
+  const [achievements, setAchievements] = useState<Achievement[]>([]); 
+  const navigate = useNavigate();// 存储所有成就
+
 
   // 所有成就列表
   const allAchievements: Achievement[] = [
@@ -38,18 +36,54 @@ const UserInfo: React.FC = () => {
     { title: "🏆 Solar System Champion", description: "Congratulations! You've obtained more than 200 points and earned your place as a true Game Master! 🚀🌟", unlocked: false }
   ];
 
-  // 更新成就解锁状态
-  user.achievements.forEach(achievementTitle => {
-    const achievement = allAchievements.find(a => a.title === achievementTitle);
-    if (achievement) {
-      achievement.unlocked = true;
-    }
-  });
+    // 获取用户信息
+    useEffect(() => {
+      const fetchUserInfo = async () => {
+        const userId = localStorage.getItem('userId'); // 从 localStorage 获取 userId
+        if (!userId) {
+          console.error('User ID not found');
+          navigate('/login');
+          return;
+        }
+  
+        try {
+          const response = await fetch(`http://localhost:5000/userInfo?userId=${userId}`); // 发送 GET 请求
+          if (response.ok) {
+            const data = await response.json();
+            setUser({
+              name: data.childName,
+              avatar: data.avatar,
+              age: data.childAge,
+              score: data.score,
+              achievements: data.achievements,
+            });
+
+
+          // 更新成就解锁状态
+          const updatedAchievements = allAchievements.map(achievement => ({
+            ...achievement,
+            unlocked: data.achievements.includes(achievement.title),
+          }));
+          setAchievements(updatedAchievements);
+        } else {
+          console.error('Failed to fetch user info');
+        }
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+    };
+
+    fetchUserInfo();
+  }, []); // 空依赖数组表示只在组件挂载时执行
 
   // 切换描述的函数
   const toggleDescription = (element: HTMLElement) => {
     element.classList.toggle('active');
   };
+
+  if (!user) {
+    return <div>Loading...</div>; // 如果用户数据未加载，显示加载中
+  }
 
   return (
     <div>
@@ -70,7 +104,7 @@ const UserInfo: React.FC = () => {
           <div className="section">
             <h2>Achievements</h2>
             <div className="achievements">
-              {allAchievements.map((achievement, index) => (
+              {achievements.map((achievement, index) => (
                 <div
                   key={index}
                   className={`achievement ${achievement.unlocked ? '' : 'locked'}`}
@@ -89,3 +123,13 @@ const UserInfo: React.FC = () => {
 };
 
 export default UserInfo;
+
+
+// const UserInfo: React.FC = () => {
+//   const user: User = {
+//     name: "John Doe",
+//     avatar: "/avatar9.jpg",
+//     age: 7,
+//     score: 10,
+//     achievements: ["🌑 Mercury Explorer", "🏆 Solar System Champion"]
+//   };
