@@ -8,6 +8,10 @@ const LogIn: React.FC = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false); // 控制 Popup 显示
     const [popupMessage, setPopupMessage] = useState(''); // 存储 Popup 的消息
 
+    const handleClose = () => {
+        document.dispatchEvent(new CustomEvent('toggleLogIn'));
+    };
+
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         // 发送登录请求到后端
@@ -49,6 +53,7 @@ const LogIn: React.FC = () => {
 
     return (
         <div className="login-container">
+            <button className="close-button" onClick={handleClose}>×</button>
             <h1>Log In</h1>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">

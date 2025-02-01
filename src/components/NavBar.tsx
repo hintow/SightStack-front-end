@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import './NavBar.css';
 import SignUp from './SignUp'; 
 import UserInfo from './UserInfo';
@@ -11,6 +11,19 @@ const NavBar: FC = () => {
   const [showUserInfo, setShowUserInfo] = useState(false);
   const [showLogIn, setShowLogIn] = useState(false);
   const [showRules, setShowRules] = useState(false);
+
+useEffect(() => {
+  const handleToggleSignUp = () => setShowSignUp(false);
+  const handleToggleLogIn = () => setShowLogIn(false);
+
+  document.addEventListener('toggleSignUp', handleToggleSignUp);
+  document.addEventListener('toggleLogIn', handleToggleLogIn);
+  
+  return () => {
+    document.removeEventListener('toggleSignUp', handleToggleSignUp);
+    document.removeEventListener('toggleLogIn', handleToggleLogIn);
+  };
+}, []);  
 
   
   const toggleSignUp = () => {
@@ -42,10 +55,10 @@ const NavBar: FC = () => {
           <a href="#" onClick={toggleRules}>🚀Rules</a>
           <a href="#" onClick={() => setShowUserInfo(!showUserInfo)}>🧑‍🚀Account</a>
           <button className="signup-button" onClick={toggleSignUp}>
-            {showSignUp ? "Hide Sign Up" : "Sign Up"}
+            Sign Up
           </button> 
           <button className="login-button" onClick={toggleLogIn}>
-            {showLogIn ? "Hide Log In" : "Log In"}
+            Log In
           </button>
         </div>
       </div>

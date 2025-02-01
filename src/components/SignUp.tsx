@@ -14,6 +14,11 @@ const SignUp: React.FC = () => {
   const [popupMessage, setPopupMessage] = useState<string>(''); // 控制弹窗消息
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false); // 控制弹窗显示
 
+  //add close button
+  const handleClose = () => {
+    document.dispatchEvent(new CustomEvent('toggleSignUp')); 
+  };
+
   const avatars = [
     '/avatar0.jpg',
     '/avatar1.jpg',
@@ -61,6 +66,7 @@ const SignUp: React.FC = () => {
 
   return (
     <div className="container">
+      <button className="close-button" onClick={handleClose}>x</button>
       <h1 style={{ textAlign: 'center' }}>Sign Up</h1>
 
       {/* Profile Creation Section */}
