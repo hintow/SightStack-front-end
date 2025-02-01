@@ -119,7 +119,7 @@ button.save-profile-button:hover {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: #ff4444;
+  background: #003366;
   color: white;
   border: none;
   cursor: pointer;
@@ -132,7 +132,7 @@ button.save-profile-button:hover {
 }
 
 .close-button:hover {
-  background: #cc0000;
+  background: #003366;
   transform: scale(1.1);
 }
 
