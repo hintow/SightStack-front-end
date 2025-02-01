@@ -33,7 +33,7 @@ const UserInfo: React.FC = () => {
     { title: "🪐 Saturn Strategist", description: "Your strategic mind has helped you solve the rings of challenges! 🪐", unlocked: false },
     { title: "🌌 Uranus Innovator", description: "Your innovative solutions have made you a master of games! 🌟", unlocked: false },
     { title: "🌠 Neptune Navigator", description: "You're navigating the deep oceans of games, just like Neptune rules the seas! 🌑🌊", unlocked: false },
-    { title: "🏆 Solar System Champion", description: "Congratulations! You've obtained more than 200 points and earned your place as a true Game Master! 🚀🌟", unlocked: false }
+    { title: "🏆 Solar System Champion", description: "Congratulations! You've obtained more than 300 points and earned your place as a true Game Master! 🚀🌟", unlocked: false }
   ];
 
     // 获取用户信息
