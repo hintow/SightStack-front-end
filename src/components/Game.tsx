@@ -43,8 +43,8 @@ const fetchOptions = {
   }
 };
 
-// const apiServer = 'http://127.0.0.1:5000';
-const apiServer = 'https://sightstack-back-end.onrender.com';
+const apiServer = 'http://127.0.0.1:5000';
+// const apiServer = 'https://sightstack-back-end.onrender.com';
 
 const fetchDailyWord = async (): Promise<Word> => {
   try {
@@ -129,12 +129,43 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
     setAnswer(Array(answer.length).fill(""));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const userId = localStorage.getItem('userId'); // 从 localStorage 中获取 userId
+  if (!userId) {
+    console.error('User is not logged in');
+    return;
+  }
+
     if (currentWord && answer.join("") === currentWord.word) {
-      setScore(prev => prev + 1); // increment score
+      const newScore = score + 1; // increment score
+      setScore(newScore);
       setIsCompleted(true);
       setPopupMessage("Correct!");
       setIsPopupOpen(true);
+
+      // update score in backend
+      try {
+        const response = await fetch(`${apiServer}/update`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId: userId, // 使用从 localStorage 中获取的 userId
+            score: newScore,
+          }),
+        });
+        console.log('newScore:', newScore, 'userId:', userId);
+
+        if (!response.ok) {
+          throw new Error('Failed to update score');
+        }
+
+        const result = await response.json();
+        console.log('Score updated successfully:', result);
+      } catch (err) {
+        console.error('Error updating score:', err);
+      }
       // Auto start new game after delay
       setTimeout(() => {
         startGame();
