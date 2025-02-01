@@ -4,6 +4,7 @@ import SignUp from './SignUp';
 import UserInfo from './UserInfo';
 import LogIn from './LogIn';
 import Rules from './Rules';
+import Leaderboard from "./Leaderboard";
 
 
 const NavBar: FC = () => {
@@ -11,6 +12,7 @@ const NavBar: FC = () => {
   const [showUserInfo, setShowUserInfo] = useState(false);
   const [showLogIn, setShowLogIn] = useState(false);
   const [showRules, setShowRules] = useState(false);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
 
 useEffect(() => {
   const handleToggleSignUp = () => setShowSignUp(false);
@@ -42,6 +44,12 @@ useEffect(() => {
     if (showLogIn) setShowLogIn(false); // Hide LogIn if Rules is shown
   };
 
+  const toggleLeaderboard = () => {
+    setShowLeaderboard(!showLeaderboard);
+    if (showSignUp) setShowSignUp(false); // Hide SignUp if Leaderboard is shown
+    if (showLogIn) setShowLogIn(false); // Hide LogIn if Leaderboard is shown
+    if (showRules) setShowRules(false); // Hide Rules if Leaderboard is shown
+  };
 
   return (
     <div>
@@ -53,6 +61,7 @@ useEffect(() => {
         {/* link-button */}
         <div className="nav-links">
           <a href="#" onClick={toggleRules}>🚀Rules</a>
+          <a href="#" onClick={toggleLeaderboard}>🏆Leaderboard</a> {/* Leaderboard */}
           <a href="#" onClick={() => setShowUserInfo(!showUserInfo)}>🧑‍🚀Account</a>
           <button className="signup-button" onClick={toggleSignUp}>
             Sign Up
@@ -62,6 +71,8 @@ useEffect(() => {
           </button>
         </div>
       </div>
+
+      {showLeaderboard && <Leaderboard />}
       {showSignUp && <SignUp />}
       {showUserInfo && <UserInfo />}
       {showLogIn && <LogIn />}
