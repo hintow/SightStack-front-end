@@ -72,4 +72,33 @@ body {
   }
   
   
+  .account-container {
+    position: relative;
+    display: inline-block;
+  }
   
+  .tooltip-popup {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-top: 5px;
+    white-space: nowrap;
+    z-index: 1000;
+  }
+
+  .tooltip-popup::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 5px 5px;
+    border-style: solid;
+    border-color: transparent transparent rgba(0, 0, 0, 0.8);
+  }

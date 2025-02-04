@@ -63,8 +63,9 @@ useEffect(() => {
   const handleAccountClick = () => {
     const userId = localStorage.getItem('userId');
     if (!userId) {
-      setPopupMessage('Please log in to view your account');
+      setPopupMessage('Please log in');
       setIsPopupOpen(true);
+      setTimeout(() => setIsPopupOpen(false), 2000);
       return;
     }
     setShowUserInfo(true);
@@ -82,8 +83,15 @@ useEffect(() => {
         <div className="nav-links">
           <a href="#" onClick={toggleRules}>🚀Rules</a>
           <a href="#" onClick={toggleLeaderboard}>🏆Leaderboard</a> {/* Leaderboard */}
-          <a href="#" onClick={handleAccountClick}>🧑‍🚀Account</a>
           {/* <a href="#" onClick={() => setShowUserInfo(!showUserInfo)}>🧑‍🚀Account</a> */}
+          
+          <div className="account-container">
+            <a href="#" onClick={handleAccountClick}>🧑‍🚀Account</a>
+            {isPopupOpen && (
+              <div className="tooltip-popup">{popupMessage}</div>
+            )}
+          </div>
+          
           <button className="signup-button" onClick={toggleSignUp}>
             Sign Up
           </button> 
