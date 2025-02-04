@@ -12,10 +12,12 @@ const Leaderboard: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  const apiServer = 'https://sightstack-back-end.onrender.com';
+
   // 获取积分榜数据
   const fetchLeaderboard = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/leaderboard');
+      const response = await fetch(`${apiServer}/leaderboard`);
       if (!response.ok) {
         throw new Error('Failed to fetch leaderboard data');
       }
