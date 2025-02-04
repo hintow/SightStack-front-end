@@ -22,16 +22,16 @@ const SignUp: React.FC = () => {
   };
 
   const avatars = [
-    '/avatar0.jpg',
-    '/avatar1.jpg',
-    '/avatar2.jpg',
-    '/avatar3.jpg',
-    '/avatar4.jpg',
-    '/avatar5.jpg',
-    '/avatar6.jpg',
-    '/avatar7.jpg',
-    '/avatar8.jpg',
-    '/avatar9.jpg',
+    'https://i.ibb.co/jmH8r5g/avatar0.jpg',
+    'https://i.ibb.co/WvRgFxbd/avatar1.jpg',
+    'https://i.ibb.co/Swn05jYX/avatar2.jpg',
+    'https://i.ibb.co/5hwc44ZP/avatar3.jpg',
+    'https://i.ibb.co/GzxyRcK/avatar4.jpg',
+    'https://i.ibb.co/cS3S1kyv/avatar5.jpg',
+    'https://i.ibb.co/Fk61BdrT/avatar6.jpg',
+    'https://i.ibb.co/Cp1gKfLW/avatar7.jpg',
+    'https://i.ibb.co/hFv9vsc9/avatar8.jpg',
+    'https://i.ibb.co/zVk7b91j/avatar9.jpg',
   ];
 
   const validatePassword = (password: string) => {
