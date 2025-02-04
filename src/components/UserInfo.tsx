@@ -89,6 +89,7 @@ const UserInfo: React.FC = () => {
   // logout function
   const logout = () => {
     localStorage.removeItem('userId');
+    document.dispatchEvent(new CustomEvent('toggleUserInfo'));
     navigate('/');
   }
 
@@ -126,7 +127,7 @@ const UserInfo: React.FC = () => {
 
           {/* Logout Button */}
           <button onClick={logout} className="logout-button">Logout</button>
-          
+
         </div>
       )}
     </div>

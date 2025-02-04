@@ -17,13 +17,17 @@ const NavBar: FC = () => {
 useEffect(() => {
   const handleToggleSignUp = () => setShowSignUp(false);
   const handleToggleLogIn = () => setShowLogIn(false);
+  const handleToggleUserInfo = () => setShowUserInfo(false); 
+
 
   document.addEventListener('toggleSignUp', handleToggleSignUp);
   document.addEventListener('toggleLogIn', handleToggleLogIn);
-  
+  document.addEventListener('toggleUserInfo', handleToggleUserInfo);
+
   return () => {
     document.removeEventListener('toggleSignUp', handleToggleSignUp);
     document.removeEventListener('toggleLogIn', handleToggleLogIn);
+    document.removeEventListener('toggleUserInfo', handleToggleUserInfo);
   };
 }, []);  
 
