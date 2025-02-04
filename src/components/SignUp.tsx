@@ -14,6 +14,8 @@ const SignUp: React.FC = () => {
   const [popupMessage, setPopupMessage] = useState<string>(''); // 控制弹窗消息
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false); // 控制弹窗显示
 
+  const apiServer = 'https://sightstack-back-end.onrender.com';
+
   //add close button
   const handleClose = () => {
     document.dispatchEvent(new CustomEvent('toggleSignUp')); 
@@ -73,7 +75,7 @@ const SignUp: React.FC = () => {
     }
  
     try {
-      const response = await axios.post('http://localhost:5000/register', {
+      const response = await axios.post(`${apiServer}/register`, {
         childName,
         childAge,
         email,

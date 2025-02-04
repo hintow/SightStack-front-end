@@ -22,6 +22,8 @@ const UserInfo: React.FC = () => {
   const [achievements, setAchievements] = useState<Achievement[]>([]); 
   const navigate = useNavigate();// 存储所有成就
 
+  const apiServer = 'https://sightstack-back-end.onrender.com';
+
 
   // 所有成就列表
   const allAchievements: Achievement[] = [
@@ -47,7 +49,7 @@ const UserInfo: React.FC = () => {
         }
   
         try {
-          const response = await fetch(`http://localhost:5000/userInfo?userId=${userId}`); // 发送 GET 请求
+          const response = await fetch(`${apiServer}/userInfo?userId=${userId}`); // 发送 GET 请求
           if (response.ok) {
             const data = await response.json();
             setUser({

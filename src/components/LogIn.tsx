@@ -10,6 +10,8 @@ const LogIn: React.FC = () => {
     const [popupMessage, setPopupMessage] = useState(''); // 存储 Popup 的消息
     const navigate = useNavigate();
 
+    const apiServer = 'https://sightstack-back-end.onrender.com';
+
     const handleClose = () => {
         document.dispatchEvent(new CustomEvent('toggleLogIn'));
     };
@@ -18,7 +20,7 @@ const LogIn: React.FC = () => {
         event.preventDefault();
         // 发送登录请求到后端
         try {
-            const response = await fetch('http://localhost:5000/login', {
+            const response = await fetch(`${apiServer}/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
