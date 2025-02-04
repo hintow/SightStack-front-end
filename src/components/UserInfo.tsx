@@ -18,14 +18,13 @@ interface User {
 
 
 const UserInfo: React.FC = () => {
-  const [user, setUser] = useState<User | null>(null); // 存储从后端获取的用户信息
+  const [user, setUser] = useState<User | null>(null); 
   const [achievements, setAchievements] = useState<Achievement[]>([]); 
-  const navigate = useNavigate();// 存储所有成就
-
+  const navigate = useNavigate();
   const apiServer = 'https://sightstack-back-end.onrender.com';
 
 
-  // 所有成就列表
+
   const allAchievements: Achievement[] = [
     { title: "🌑 Mercury Explorer", description: "Like the swift Mercury 🌕, you've taken your first steps in solving games! 🚀", unlocked: false },
     { title: "🌟 Venus Voyager", description: "Your problem-solving is as radiant as Venus in the night sky 🌘. Great work on your games! 🌍", unlocked: false },
@@ -87,6 +86,12 @@ const UserInfo: React.FC = () => {
     return <div>Loading...</div>; // 如果用户数据未加载，显示加载中
   }
 
+  // logout function
+  const logout = () => {
+    localStorage.removeItem('userId');
+    navigate('/');
+  }
+
   return (
     <div>
       {user.name && (
@@ -118,6 +123,10 @@ const UserInfo: React.FC = () => {
               ))}
             </div>
           </div>
+
+          {/* Logout Button */}
+          <button onClick={logout} className="logout-button">Logout</button>
+          
         </div>
       )}
     </div>
@@ -125,13 +134,3 @@ const UserInfo: React.FC = () => {
 };
 
 export default UserInfo;
-
-
-// const UserInfo: React.FC = () => {
-//   const user: User = {
-//     name: "John Doe",
-//     avatar: "/avatar9.jpg",
-//     age: 7,
-//     score: 10,
-//     achievements: ["🌑 Mercury Explorer", "🏆 Solar System Champion"]
-//   };
