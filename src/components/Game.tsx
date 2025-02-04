@@ -80,7 +80,7 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
   const [isCompleted, setIsCompleted] = useState(false);
-  const [score, setScore] = useState(0);// add score state
+  const [score, setScore] = useState(0);
 
   const startGame = async () => {
     try {
@@ -130,20 +130,15 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
   };
 
   const handleSubmit = async () => {
-    const userId = localStorage.getItem('userId'); // 从 localStorage 中获取 userId
-  if (!userId) {
-    console.error('User is not logged in');
-    return;
-  }
-
     if (currentWord && answer.join("") === currentWord.word) {
-      const newScore = score + 1; // increment score
+      const newScore = score + 1; 
       setScore(newScore);
       setIsCompleted(true);
       setPopupMessage("Correct!");
       setIsPopupOpen(true);
 
-      // update score in backend
+    const userId = localStorage.getItem('userId'); 
+    if (userId) {
       try {
         const response = await fetch(`${apiServer}/update`, {
           method: 'POST',
@@ -151,21 +146,21 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            userId: userId, // 使用从 localStorage 中获取的 userId
-            score: 1,
+            userId: userId, 
+            score: newScore,
           }),
         });
         console.log('newScore:', newScore, 'userId:', userId);
 
         if (!response.ok) {
-          throw new Error('Failed to update score');
+          // throw new Error('Failed to update score');
+          console.warn('Score update failed, but game continues');
         }
-
-        const result = await response.json();
-        console.log('Score updated successfully:', result);
       } catch (err) {
-        console.error('Error updating score:', err);
+        console.warn('Error updating score in database:', err);
       }
+    }
+    
       // Auto start new game after delay
       setTimeout(() => {
         startGame();
