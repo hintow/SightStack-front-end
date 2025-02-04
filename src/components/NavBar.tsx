@@ -5,6 +5,7 @@ import UserInfo from './UserInfo';
 import LogIn from './LogIn';
 import Rules from './Rules';
 import Leaderboard from "./Leaderboard";
+import Popup from "./Popup";
 
 
 const NavBar: FC = () => {
@@ -13,6 +14,9 @@ const NavBar: FC = () => {
   const [showLogIn, setShowLogIn] = useState(false);
   const [showRules, setShowRules] = useState(false);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [popupMessage, setPopupMessage] = useState<string>('');
 
 useEffect(() => {
   const handleToggleSignUp = () => setShowSignUp(false);
@@ -55,6 +59,18 @@ useEffect(() => {
     if (showRules) setShowRules(false); // Hide Rules if Leaderboard is shown
   };
 
+    // Update Account click handler
+  const handleAccountClick = () => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      setPopupMessage('Please log in to view your account');
+      setIsPopupOpen(true);
+      return;
+    }
+    setShowUserInfo(true);
+  };
+  
+
   return (
     <div>
       {/* navbar  */}
@@ -66,7 +82,8 @@ useEffect(() => {
         <div className="nav-links">
           <a href="#" onClick={toggleRules}>🚀Rules</a>
           <a href="#" onClick={toggleLeaderboard}>🏆Leaderboard</a> {/* Leaderboard */}
-          <a href="#" onClick={() => setShowUserInfo(!showUserInfo)}>🧑‍🚀Account</a>
+          <a href="#" onClick={handleAccountClick}>🧑‍🚀Account</a>
+          {/* <a href="#" onClick={() => setShowUserInfo(!showUserInfo)}>🧑‍🚀Account</a> */}
           <button className="signup-button" onClick={toggleSignUp}>
             Sign Up
           </button> 
@@ -81,6 +98,11 @@ useEffect(() => {
       {showUserInfo && <UserInfo />}
       {showLogIn && <LogIn />}
       {showRules && <Rules />}
+      <Popup 
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        message={popupMessage}
+      />
     </div>
   );
 };
