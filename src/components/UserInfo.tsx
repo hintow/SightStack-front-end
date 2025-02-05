@@ -23,6 +23,11 @@ const UserInfo: React.FC = () => {
   const navigate = useNavigate();
   const apiServer = 'https://sightstack-back-end.onrender.com';
 
+  const handleClose = () => {
+    document.dispatchEvent(new CustomEvent('toggleUserInfo'));
+    navigate('/');
+  }
+
 
 
   const allAchievements: Achievement[] = [
@@ -97,6 +102,7 @@ const UserInfo: React.FC = () => {
     <div>
       {user.name && (
         <div className="profile-container">
+          <button className="close-button" onClick={handleClose}>x</button>
           <div className="profile-header">
             <div className="avatar">
               <img src={user.avatar} alt="User Avatar" />
