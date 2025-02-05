@@ -5,7 +5,6 @@ import UserInfo from './UserInfo';
 import LogIn from './LogIn';
 import Rules from './Rules';
 import Leaderboard from "./Leaderboard";
-import Popup from "./Popup";
 
 
 const NavBar: FC = () => {
@@ -15,8 +14,8 @@ const NavBar: FC = () => {
   const [showRules, setShowRules] = useState(false);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
 
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [popupMessage, setPopupMessage] = useState<string>('');
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [tooltipMessage, setTooltipMessage] = useState('');
 
 useEffect(() => {
   const handleToggleSignUp = () => setShowSignUp(false);
@@ -63,9 +62,9 @@ useEffect(() => {
   const handleAccountClick = () => {
     const userId = localStorage.getItem('userId');
     if (!userId) {
-      setPopupMessage('Please log in');
-      setIsPopupOpen(true);
-      setTimeout(() => setIsPopupOpen(false), 2000);
+      setTooltipMessage('Please log in');
+      setShowTooltip(true);
+      setTimeout(() => setShowTooltip(false), 2000);
       return;
     }
     setShowUserInfo(true);
@@ -80,8 +79,8 @@ useEffect(() => {
           <a href="#" onClick={toggleLeaderboard}>🏆Leaderboard</a> {/* Leaderboard */}          
           <div className="account-container">
           <a href="#" onClick={handleAccountClick}>🧑‍🚀Account</a>
-          {isPopupOpen && (
-            <div className="tooltip-popup">{popupMessage}</div>
+          {showTooltip && (
+            <div className="tooltip-popup">{tooltipMessage}</div>
           )}
         </div>
         <button className="signup-button" onClick={toggleSignUp}>
