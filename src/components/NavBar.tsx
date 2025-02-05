@@ -90,10 +90,10 @@ useEffect(() => {
             {isPopupOpen && (
               <div className="tooltip-popup">{popupMessage}</div>
             )} */}
-            <a href="#" onClick={(e) => { e.preventDefault(); handleAccountClick(); }}>
-            🧑‍🚀Account
-            </a>
+            <button className="account-button" onClick={handleAccountClick}>🧑‍🚀Account</button>
             {isPopupOpen && <div className="tooltip-popup">{popupMessage}</div>}
+          </div>
+
           </div>
           
           <button className="signup-button" onClick={toggleSignUp}>
