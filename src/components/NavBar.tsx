@@ -98,11 +98,6 @@ useEffect(() => {
       {showUserInfo && <UserInfo />}
       {showLogIn && <LogIn />}
       {showRules && <Rules />}
-      <Popup 
-        isOpen={isPopupOpen}
-        onClose={() => setIsPopupOpen(false)}
-        message={popupMessage}
-      />
     </div>
   );
 };
