@@ -71,37 +71,25 @@ useEffect(() => {
     setShowUserInfo(true);
   };
   
-
   return (
     <div>
-      {/* navbar  */}
       <div className="navbar">
-        {/* Logo */}
         <img src="/logo.png" alt="SpaceFun Logo" className="logo" />
-
-        {/* link-button */}
         <div className="nav-links">
           <a href="#" onClick={toggleRules}>🚀Rules</a>
-          <a href="#" onClick={toggleLeaderboard}>🏆Leaderboard</a> {/* Leaderboard */}
-          {/* <a href="#" onClick={() => setShowUserInfo(!showUserInfo)}>🧑‍🚀Account</a> */}
-          
+          <a href="#" onClick={toggleLeaderboard}>🏆Leaderboard</a> {/* Leaderboard */}          
           <div className="account-container">
-            {/* <a href="#" onClick={handleAccountClick}>🧑‍🚀Account</a>
-            {isPopupOpen && (
-              <div className="tooltip-popup">{popupMessage}</div>
-            )} */}
-            <button className="account-button" onClick={handleAccountClick}>🧑‍🚀Account</button>
-            {isPopupOpen && <div className="tooltip-popup">{popupMessage}</div>}
-          </div>
-
-          </div>
-          
-          <button className="signup-button" onClick={toggleSignUp}>
-            Sign Up
-          </button> 
-          <button className="login-button" onClick={toggleLogIn}>
-            Log In
-          </button>
+          <a href="#" onClick={handleAccountClick}>🧑‍🚀Account</a>
+          {isPopupOpen && (
+            <div className="tooltip-popup">{popupMessage}</div>
+          )}
+        </div>
+        <button className="signup-button" onClick={toggleSignUp}>
+          Sign Up
+        </button> 
+        <button className="login-button" onClick={toggleLogIn}>
+          Log In
+        </button>
         </div>
       </div>
 
