@@ -124,3 +124,21 @@ body {
     .profile-container {
       position: relative;
     }
+
+    .achievement-popup {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #4CAF50;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 10px;
+      animation: slideDown 0.5s ease-out;
+      z-index: 1000;
+    }
+    
+    @keyframes slideDown {
+      from { transform: translate(-50%, -100%); }
+      to { transform: translate(-50%, 0); }
+    }

@@ -45,6 +45,8 @@ const UserInfo: React.FC = () => {
   const [achievements, setAchievements] = useState<Achievement[]>([]); 
   const navigate = useNavigate();
   const apiServer = 'https://sightstack-back-end.onrender.com';
+  const [showAchievementPopup, setShowAchievementPopup] = useState(false);
+  const [achievementPopupMessage, setAchievementPopupMessage] = useState('');
 
   const handleClose = () => {
     document.dispatchEvent(new CustomEvent('toggleUserInfo'));
@@ -52,10 +54,25 @@ const UserInfo: React.FC = () => {
   }
 
   const checkScoreAchievements = (score: number) => {
+    const previousAchievements = achievements.filter(a => a.unlocked);
+  
       const updatedAchievements = allAchievements.map(achievement => ({
         ...achievement,
         unlocked: score >= ACHIEVEMENT_THRESHOLDS[achievement.title as keyof typeof ACHIEVEMENT_THRESHOLDS]
       }));
+
+      // Check for newly unlocked achievements
+      const newUnlocked = updatedAchievements.filter(a => 
+        a.unlocked && !previousAchievements.find(p => p.title === a.title)
+      );
+      
+      if (newUnlocked.length > 0) {
+        setAchievementPopupMessage(
+          `🎉 Achievement Unlocked: ${newUnlocked.map(a => a.title).join(', ')}!`
+        );
+        setShowAchievementPopup(true);
+        setTimeout(() => setShowAchievementPopup(false), 3000);
+      }
       setAchievements(updatedAchievements);
     };
 
@@ -138,6 +155,12 @@ const UserInfo: React.FC = () => {
             </div>
           </div>
 
+          {showAchievementPopup && (
+            <div className="achievement-popup">
+              {achievementPopupMessage}
+            </div>
+          )}
+
           {/* Logout Button */}
           <button onClick={logout} className="logout-button">Logout</button>
 
@@ -149,14 +172,3 @@ const UserInfo: React.FC = () => {
 
 export default UserInfo;
 
-
-
-          //   // 更新成就解锁状态
-        //   const updatedAchievements = allAchievements.map(achievement => ({
-        //     ...achievement,
-        //     unlocked: data.achievements.includes(achievement.title),
-        //   }));
-        //   setAchievements(updatedAchievements);
-        // } else {
-        //   console.error('Failed to fetch user info');
-        // }
