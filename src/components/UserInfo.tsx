@@ -2,6 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './UserInfo.css';
 
+const ACHIEVEMENT_THRESHOLDS = {
+  "🌑 Mercury Explorer": 10,
+  "🌟 Venus Voyager": 30,
+  "🌍 Earth Defender": 50,
+  "💫 Mars Adventurer": 80,
+  "🛸 Jupiter Giant": 120,
+  "🪐 Saturn Strategist": 160,
+  "🌌 Uranus Innovator": 200,
+  "🌠 Neptune Navigator": 250,
+  "🏆 Solar System Champion": 300
+};
+
 interface Achievement {
   title: string;
   description: string;
@@ -16,6 +28,17 @@ interface User {
   achievements: string[];
 }
 
+const allAchievements: Achievement[] = [
+  { title: "🌑 Mercury Explorer", description: "Like the swift Mercury 🌕, you've taken your first steps in solving games! 🚀", unlocked: false },
+  { title: "🌟 Venus Voyager", description: "Your problem-solving is as radiant as Venus in the night sky 🌘. Great work on your games! 🌍", unlocked: false },
+  { title: "🌍 Earth Defender", description: "You've defended Earth 🌏 from the challenges of games. Keep it up! 🛡️", unlocked: false },
+  { title: "💫 Mars Adventurer", description: "Your adventurous spirit has led you to conquer the challenges of Mars! 🔴", unlocked: false },
+  { title: "🛸 Jupiter Giant", description: "Like Jupiter 🌑, your skills in games are gigantic! 💫", unlocked: false },
+  { title: "🪐 Saturn Strategist", description: "Your strategic mind has helped you solve the rings of challenges! 🪐", unlocked: false },
+  { title: "🌌 Uranus Innovator", description: "Your innovative solutions have made you a master of games! 🌟", unlocked: false },
+  { title: "🌠 Neptune Navigator", description: "You're navigating the deep oceans of games, just like Neptune rules the seas! 🌑🌊", unlocked: false },
+  { title: "🏆 Solar System Champion", description: "Congratulations! You've obtained more than 300 points and earned your place as a true Game Master! 🚀🌟", unlocked: false }
+];
 
 const UserInfo: React.FC = () => {
   const [user, setUser] = useState<User | null>(null); 
@@ -28,57 +51,41 @@ const UserInfo: React.FC = () => {
     navigate('/');
   }
 
-
-
-  const allAchievements: Achievement[] = [
-    { title: "🌑 Mercury Explorer", description: "Like the swift Mercury 🌕, you've taken your first steps in solving games! 🚀", unlocked: false },
-    { title: "🌟 Venus Voyager", description: "Your problem-solving is as radiant as Venus in the night sky 🌘. Great work on your games! 🌍", unlocked: false },
-    { title: "🌍 Earth Defender", description: "You've defended Earth 🌏 from the challenges of games. Keep it up! 🛡️", unlocked: false },
-    { title: "💫 Mars Adventurer", description: "Your adventurous spirit has led you to conquer the challenges of Mars! 🔴", unlocked: false },
-    { title: "🛸 Jupiter Giant", description: "Like Jupiter 🌑, your skills in games are gigantic! 💫", unlocked: false },
-    { title: "🪐 Saturn Strategist", description: "Your strategic mind has helped you solve the rings of challenges! 🪐", unlocked: false },
-    { title: "🌌 Uranus Innovator", description: "Your innovative solutions have made you a master of games! 🌟", unlocked: false },
-    { title: "🌠 Neptune Navigator", description: "You're navigating the deep oceans of games, just like Neptune rules the seas! 🌑🌊", unlocked: false },
-    { title: "🏆 Solar System Champion", description: "Congratulations! You've obtained more than 300 points and earned your place as a true Game Master! 🚀🌟", unlocked: false }
-  ];
+  const checkScoreAchievements = (score: number) => {
+      const updatedAchievements = allAchievements.map(achievement => ({
+        ...achievement,
+        unlocked: score >= ACHIEVEMENT_THRESHOLDS[achievement.title as keyof typeof ACHIEVEMENT_THRESHOLDS]
+      }));
+      setAchievements(updatedAchievements);
+    };
 
     // 获取用户信息
-    useEffect(() => {
-      const fetchUserInfo = async () => {
-        const userId = localStorage.getItem('userId'); // 从 localStorage 获取 userId
-        if (!userId) {
-          console.error('User ID not found');
-          navigate('/login');
-          return;
-        }
-  
-        try {
-          const response = await fetch(`${apiServer}/userInfo?userId=${userId}`); // 发送 GET 请求
-          if (response.ok) {
-            const data = await response.json();
-            setUser({
-              name: data.childName,
-              avatar: data.avatar,
-              age: data.childAge,
-              score: data.score,
-              achievements: data.achievements,
-            });
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const userId = localStorage.getItem('userId'); // 从 localStorage 获取 userId
+      if (!userId) {
+        console.error('User ID not found');
+        navigate('/login');
+        return;
+      }
 
-
-          // 更新成就解锁状态
-          const updatedAchievements = allAchievements.map(achievement => ({
-            ...achievement,
-            unlocked: data.achievements.includes(achievement.title),
-          }));
-          setAchievements(updatedAchievements);
-        } else {
-          console.error('Failed to fetch user info');
+      try {
+        const response = await fetch(`${apiServer}/userInfo?userId=${userId}`); // 发送 GET 请求
+        if (response.ok) {
+          const data = await response.json();
+          setUser({
+            name: data.childName,
+            avatar: data.avatar,
+            age: data.childAge,
+            score: data.score,
+            achievements: data.achievements,
+          });
+          checkScoreAchievements(data.score);
         }
       } catch (error) {
         console.error('Error fetching user info:', error);
       }
     };
-
     fetchUserInfo();
   }, []); // 空依赖数组表示只在组件挂载时执行
 
@@ -141,3 +148,15 @@ const UserInfo: React.FC = () => {
 };
 
 export default UserInfo;
+
+
+
+          //   // 更新成就解锁状态
+        //   const updatedAchievements = allAchievements.map(achievement => ({
+        //     ...achievement,
+        //     unlocked: data.achievements.includes(achievement.title),
+        //   }));
+        //   setAchievements(updatedAchievements);
+        // } else {
+        //   console.error('Failed to fetch user info');
+        // }
