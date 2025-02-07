@@ -60,7 +60,6 @@ React Router DOM
 Axios
 TypeScript
 Vite
-Expo
 
 ## Code Style and Quality
 
