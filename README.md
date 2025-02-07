@@ -1,50 +1,92 @@
-# React + TypeScript + Vite
+# SightStack Front-End
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SightStack is an educational game application designed to help children improve their learning abilities through fun games. This project is the front-end part of SightStack, built using React and TypeScript.
 
-Currently, two official plugins are available:
+## Project Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+project-root/
+├── node_modules/
+├── public/
+│   ├── background.jpg
+│   ├── avatar9.jpg
+│   └──... (other public assets)
+├── src/
+│   ├── assets/
+│   │   └──... (other assets)
+│   ├── components/
+│   │   ├── Background.css
+│   │   ├── Background.tsx
+│   │   ├── DailyGame.css
+│   │   ├── DailyGame.tsx
+│   │   ├── Game.css
+│   │   ├── Game.tsx
+│   │   ├── LogIn.css
+│   │   ├── LogIn.tsx
+│   │   ├── MainHome.css
+│   │   ├── MainHome.tsx
+│   │   ├── NavBar.css
+│   │   ├── NavBar.tsx
+│   │   ├── Popup.css
+│   │   ├── Popup.tsx
+│   │   ├── Rules.css
+│   │   ├── Rules.tsx
+│   │   ├── SignUp.css
+│   │   ├── SignUp.tsx
+│   │   ├── UserInfo.css
+│   │   ├── UserInfo.tsx
+│   │   └──... (other component files)
+│   ├── App.css
+│   ├── App.tsx
+│   ├── index.css
+│   ├── main.tsx
+│   ├── vite - env.d.ts
+│   └──... (other source files)
+├──.gitignore
+├── index.html
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+└──... (other configuration files)
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Installation and Running
 
-- Configure the top-level `parserOptions` property like this:
+## Clone the Repository
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Project Dependencies
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+React
+React Router DOM
+Axios
+TypeScript
+Vite
+Expo
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Code Style and Quality
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+This project uses ESLint for code linting to ensure code style and quality.
+
+## Main Features
+
+User registration and login
+Display user information and achievements
+Game interface with drag-and-drop letters to form words
+Daily game mode
+Leaderboard
+
+## Contributing
+
+Contributions are welcome! Please fork this repository and submit a pull request.
+
+## avatar
+
+https://i.ibb.co/jmH8r5g/avatar0.jpg
+https://i.ibb.co/WvRgFxbd/avatar1.jpg
+https://i.ibb.co/Swn05jYX/avatar2.jpg
+https://i.ibb.co/5hwc44ZP/avatar3.jpg
+https://i.ibb.co/GzxyRcK/avatar4.jpg
+https://i.ibb.co/cS3S1kyv/avatar5.jpg
+https://i.ibb.co/Fk61BdrT/avatar6.jpg
+https://i.ibb.co/Cp1gKfLW/avatar7.jpg
+https://i.ibb.co/hFv9vsc9/avatar8.jpg
+https://i.ibb.co/zVk7b91j/avatar9.jpg
