@@ -24,6 +24,7 @@
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #ddd;
+    transition: background-color 0.2s ease;
   }
   
   .leaderboard-item:last-child {
@@ -31,12 +32,15 @@
   }
   
   .medal {
-    font-size: 1.2em;
+    width: 24px; 
     margin-right: 10px;
+    display: inline-block;
+    text-align: center;
   }
   
   .child-name {
     flex-grow: 1;
+    margin-right: 10px;
     font-weight: bold;
   }
   
@@ -48,11 +52,10 @@
     width: 35px;  
     height: 35px;
     border-radius: 50%;  
-    margin: 0 10px;    
+    margin: 10px;    
     object-fit: cover;   
     border: 2px solid #fff; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-    transition: transform 0.2s ease;  
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) 
   }
   
   .leaderboard-avatar:hover {
@@ -66,3 +69,28 @@
     gap: 10px;
     padding: 8px 15px;
   }
+
+  /* Gold for 1st place */
+.leaderboard-item:nth-child(1) {
+  background-color: rgba(255, 215, 0, 0.1);
+}
+
+/* Silver for 2nd place */
+.leaderboard-item:nth-child(2) {
+  background-color: rgba(192, 192, 192, 0.1);
+}
+
+/* Bronze for 3rd place */
+.leaderboard-item:nth-child(3) {
+  background-color: rgba(205, 127, 50, 0.1);
+}
+
+/* Subtle background for other positions */
+.leaderboard-item:nth-child(n+4) {
+  background-color: rgba(240, 240, 240, 0.5);
+}
+
+/* Hover effect for all rows */
+.leaderboard-item:hover {
+  background-color: rgba(0, 102, 204, 0.1);
+}
