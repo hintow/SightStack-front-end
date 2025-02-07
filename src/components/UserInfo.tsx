@@ -45,8 +45,6 @@ const UserInfo: React.FC = () => {
   const [achievements, setAchievements] = useState<Achievement[]>([]); 
   const navigate = useNavigate();
   const apiServer = 'https://sightstack-back-end.onrender.com';
-  const [showAchievementPopup, setShowAchievementPopup] = useState(false);
-  const [achievementPopupMessage, setAchievementPopupMessage] = useState('');
 
   const handleClose = () => {
     document.dispatchEvent(new CustomEvent('toggleUserInfo'));
@@ -54,25 +52,12 @@ const UserInfo: React.FC = () => {
   }
 
   const checkScoreAchievements = (score: number) => {
-    const previousAchievements = achievements.filter(a => a.unlocked);
   
       const updatedAchievements = allAchievements.map(achievement => ({
         ...achievement,
         unlocked: score >= ACHIEVEMENT_THRESHOLDS[achievement.title as keyof typeof ACHIEVEMENT_THRESHOLDS]
       }));
 
-      // Check for newly unlocked achievements
-      const newUnlocked = updatedAchievements.filter(a => 
-        a.unlocked && !previousAchievements.find(p => p.title === a.title)
-      );
-      
-      if (newUnlocked.length > 0) {
-        setAchievementPopupMessage(
-          `🎉 Achievement Unlocked: ${newUnlocked.map(a => a.title).join(', ')}!`
-        );
-        setShowAchievementPopup(true);
-        setTimeout(() => setShowAchievementPopup(false), 3000);
-      }
       setAchievements(updatedAchievements);
     };
 
@@ -105,6 +90,38 @@ const UserInfo: React.FC = () => {
     };
     fetchUserInfo();
   }, []); // 空依赖数组表示只在组件挂载时执行
+
+  useEffect(() => {
+    const handleScoreUpdate = () => {
+      const fetchUserInfo = async () => {
+        const userId = localStorage.getItem('userId');
+        if (!userId) return;
+  
+        try {
+          const response = await fetch(`${apiServer}/userInfo?userId=${userId}`);
+          if (response.ok) {
+            const data = await response.json();
+            setUser({
+              name: data.childName,
+              avatar: data.avatar,
+              age: data.childAge,
+              score: data.score,
+              achievements: data.achievements,
+            });
+            checkScoreAchievements(data.score);
+          }
+        } catch (error) {
+          console.error('Error fetching user info:', error);
+        }
+      };
+      fetchUserInfo();
+    };
+    document.addEventListener('scoreUpdate', handleScoreUpdate);
+    return () => {
+      document.removeEventListener('scoreUpdate', handleScoreUpdate);
+    };
+  }, []);
+  
 
   // 切换描述的函数
   const toggleDescription = (element: HTMLElement) => {
@@ -154,13 +171,6 @@ const UserInfo: React.FC = () => {
               ))}
             </div>
           </div>
-
-          {showAchievementPopup && (
-            <div className="achievement-popup">
-              {achievementPopupMessage}
-            </div>
-          )}
-
           {/* Logout Button */}
           <button onClick={logout} className="logout-button">Logout</button>
 
