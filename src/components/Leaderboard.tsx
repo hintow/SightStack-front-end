@@ -5,6 +5,7 @@ import './Leaderboard.css';
 interface User {
   childName: string;
   score: number;
+  avatar: string;
 }
 
 const Leaderboard: React.FC = () => {
@@ -55,6 +56,11 @@ const Leaderboard: React.FC = () => {
             <span className="medal">
               {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : ''}
             </span>
+            <img 
+            src={user.avatar} 
+            alt={`${user.childName}'s avatar`} 
+            className="leaderboard-avatar"
+            />
             <span className="child-name">{user.childName}</span>
             <span className="score">{user.score} points</span>
           </li>

@@ -80,7 +80,9 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
   const [isCompleted, setIsCompleted] = useState(false);
-  const [score, setScore] = useState(0);
+  // const [score, setScore] = useState(0);
+  const [sessionScore, setSessionScore] = useState(0);
+
 
   const startGame = async () => {
     try {
@@ -131,8 +133,7 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
 
   const handleSubmit = async () => {
     if (currentWord && answer.join("") === currentWord.word) {
-      const newScore = score + 1; 
-      setScore(newScore);
+      setSessionScore(prev => prev + 1);
       setIsCompleted(true);
       setPopupMessage("Correct!");
       setIsPopupOpen(true);
@@ -147,14 +148,19 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
           },
           body: JSON.stringify({
             userId: userId, 
-            score: newScore,
+            score: 1,
           }),
         });
-        console.log('newScore:', newScore, 'userId:', userId);
 
-        if (!response.ok) {
-          // throw new Error('Failed to update score');
-          console.warn('Score update failed, but game continues');
+        if (response.ok) {
+          const data = await response.json();
+          document.dispatchEvent(new CustomEvent('scoreUpdate'));
+       
+          if (data.newAchievements?.length > 0) {
+            setPopupMessage('🎉 Achievement Unlocked! 🎉 ');
+            setIsPopupOpen(true);
+            setTimeout(() => setIsPopupOpen(false), 5000);
+          }
         }
       } catch (err) {
         console.warn('Error updating score in database:', err);
@@ -203,7 +209,7 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
         </button>
 
         <div className="score-display">
-          Score: {score}
+          Score: {sessionScore}
         </div>
 
         <button className="return-button" onClick={goBackToHome}>
