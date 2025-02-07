@@ -35,7 +35,7 @@
   .popup-message {
     font-family: 'Comic Sans MS', 'Comic Sans', cursive; /* 使用可爱的字体 */
     font-size: 26px; /* 增大字体 */
-    color: #8a2be2; /* 使用粉红色 */
+    color: #003366; 
     text-shadow: 2px 2px #abccee; /* 添加阴影效果 */
   }
   
