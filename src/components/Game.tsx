@@ -147,7 +147,7 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
           },
           body: JSON.stringify({
             userId: userId, 
-            score: newScore,
+            score: 1,
           }),
         });
         console.log('newScore:', newScore, 'userId:', userId);
