@@ -157,9 +157,9 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
           document.dispatchEvent(new CustomEvent('scoreUpdate'));
        
           if (data.newAchievements?.length > 0) {
-            setPopupMessage(`🎉 Achievement Unlocked: ${data.newAchievements.join(', ')}!`);
+            setPopupMessage('🎉 Achievement Unlocked! 🎉 ');
             setIsPopupOpen(true);
-            setTimeout(() => setIsPopupOpen(false), 3000);
+            setTimeout(() => setIsPopupOpen(false), 5000);
           }
         }
       } catch (err) {
