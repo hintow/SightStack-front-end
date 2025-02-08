@@ -82,6 +82,7 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
   const [isCompleted, setIsCompleted] = useState(false);
   // const [score, setScore] = useState(0);
   const [sessionScore, setSessionScore] = useState(0);
+  const [usedLetters, setUsedLetters] = useState<boolean[]>([]);
 
 
   const startGame = async () => {
@@ -101,6 +102,7 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
       const shuffled = shuffleArray(randomWord.word.split(''));
       setShuffledWord(shuffled);
       setAnswer(Array(shuffled.length).fill(""));
+      setUsedLetters(Array(shuffled.length).fill(false));
       setShowHint(false);
     } catch (err) {
       console.error('Failed to start game:', err);
@@ -115,8 +117,10 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
     return array;
   };
 
-  const handleDragStart = (letter: string) => {
-    setDraggedLetter(letter);
+  const handleDragStart = (letter: string, index: number) => {
+    if (!usedLetters[index]) {
+      setDraggedLetter(letter);
+    }
   };
 
   const handleDrop = (index: number) => {
@@ -124,11 +128,19 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
       const newAnswer = [...answer];
       newAnswer[index] = draggedLetter;
       setAnswer(newAnswer);
+
+      const newUsedLetters = [...usedLetters];
+      const draggedIndex = shuffledWord.indexOf(draggedLetter);
+      newUsedLetters[draggedIndex] = true;
+      setUsedLetters(newUsedLetters);
+
+      setDraggedLetter(null);
     }
   };
 
   const handleReplay = () => {
     setAnswer(Array(answer.length).fill(""));
+    setUsedLetters(Array(usedLetters.length).fill(false));
   };
 
   const handleSubmit = async () => {
@@ -223,10 +235,10 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
             <div id="puzzle">
               {shuffledWord.map((letter, index) => (
                 <div
-                  key={index}
-                  className="draggable"
-                  draggable
-                  onDragStart={() => handleDragStart(letter)}
+                key={index}
+                className={`draggable ${usedLetters[index] ? 'used' : ''}`}
+                draggable={!usedLetters[index]}
+                onDragStart={() => handleDragStart(letter, index)}
                 >
                   {letter}
                 </div>
