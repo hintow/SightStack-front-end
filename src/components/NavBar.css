@@ -1,5 +1,5 @@
 /* 基础样式 */
-/* body {
+body {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -11,7 +11,7 @@
     overflow: hidden;
     position: relative;
     justify-content: center;
-  } */
+  }
   
   /* 顶部导航栏样式 */
   .navbar {
