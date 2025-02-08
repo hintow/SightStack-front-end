@@ -206,3 +206,8 @@ body::after {
   opacity: 0.2;
   z-index: -1;
 }
+
+.draggable.used {
+  opacity: 0.5;
+  pointer-events: none; /* 禁用点击和拖动 */
+}

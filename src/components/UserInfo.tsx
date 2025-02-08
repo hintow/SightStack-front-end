@@ -18,6 +18,7 @@ interface Achievement {
   title: string;
   description: string;
   unlocked: boolean;
+  required_score: number;
 }
 
 interface User {
@@ -29,20 +30,21 @@ interface User {
 }
 
 const allAchievements: Achievement[] = [
-  { title: "🌑 Mercury Explorer", description: "Like the swift Mercury 🌕, you've taken your first steps in solving games! 🚀", unlocked: false },
-  { title: "🌟 Venus Voyager", description: "Your problem-solving is as radiant as Venus in the night sky 🌘. Great work on your games! 🌍", unlocked: false },
-  { title: "🌍 Earth Defender", description: "You've defended Earth 🌏 from the challenges of games. Keep it up! 🛡️", unlocked: false },
-  { title: "💫 Mars Adventurer", description: "Your adventurous spirit has led you to conquer the challenges of Mars! 🔴", unlocked: false },
-  { title: "🛸 Jupiter Giant", description: "Like Jupiter 🌑, your skills in games are gigantic! 💫", unlocked: false },
-  { title: "🪐 Saturn Strategist", description: "Your strategic mind has helped you solve the rings of challenges! 🪐", unlocked: false },
-  { title: "🌌 Uranus Innovator", description: "Your innovative solutions have made you a master of games! 🌟", unlocked: false },
-  { title: "🌠 Neptune Navigator", description: "You're navigating the deep oceans of games, just like Neptune rules the seas! 🌑🌊", unlocked: false },
-  { title: "🏆 Solar System Champion", description: "Congratulations! You've obtained more than 300 points and earned your place as a true Game Master! 🚀🌟", unlocked: false }
+  { title: "🌑 Mercury Explorer", description: "Like the swift Mercury 🌕, you've taken your first steps in solving games! 🚀", required_score: 10, unlocked: false },
+    { title: "🌟 Venus Voyager", description: "Your problem-solving is as radiant as Venus in the night sky 🌘. Great work on your games! 🌍", required_score: 30, unlocked: false },
+    { title: "🌍 Earth Defender", description: "You've defended Earth 🌏 from the challenges of games. Keep it up! 🛡️", required_score: 50, unlocked: false },
+    { title: "💫 Mars Adventurer", description: "Your adventurous spirit has led you to conquer the challenges of Mars! 🔴", required_score: 80, unlocked: false },
+    { title: "🛸 Jupiter Giant", description: "Like Jupiter 🌑, your skills in games are gigantic! 💫", required_score: 100, unlocked: false },
+    { title: "🪐 Saturn Strategist", description: "Your strategic mind has helped you solve the rings of challenges! 🪐", required_score: 150, unlocked: false },
+    { title: "🌌 Uranus Innovator", description: "Your innovative solutions have made you a master of games! 🌟", required_score: 200, unlocked: false },
+    { title: "🌠 Neptune Navigator", description: "You're navigating the deep oceans of games, just like Neptune rules the seas! 🌑🌊", required_score: 260, unlocked: false },
+    { title: "🏆 Solar System Champion", description: "Congratulations! You've obtained more than 300 points and earned your place as a true Game Master! 🚀🌟", required_score: 300, unlocked: false }
 ];
 
 const UserInfo: React.FC = () => {
   const [user, setUser] = useState<User | null>(null); 
   const [achievements, setAchievements] = useState<Achievement[]>([]); 
+  const [lockedAchievement, setLockedAchievement] = useState<Achievement | null>(null); // 新增状态变量
   const navigate = useNavigate();
   const apiServer = 'https://sightstack-back-end.onrender.com';
 
@@ -163,7 +165,13 @@ const UserInfo: React.FC = () => {
                 <div
                   key={index}
                   className={`achievement ${achievement.unlocked ? '' : 'locked'}`}
-                  onClick={(e) => achievement.unlocked && toggleDescription(e.currentTarget)}
+                  onClick={(e) => {
+                    if (achievement.unlocked) {
+                      toggleDescription(e.currentTarget);
+                    } else {
+                      setLockedAchievement(achievement); // 设置未解锁成就
+                    }
+                  }}
                 >
                   {achievement.title}<br />
                   <small>{achievement.unlocked ? achievement.description : "Locked"}</small>
@@ -174,6 +182,17 @@ const UserInfo: React.FC = () => {
           {/* Logout Button */}
           <button onClick={logout} className="logout-button">Logout</button>
 
+          {/* 新增：未解锁成就提示弹窗 */}
+          {lockedAchievement && (
+            <div className="modal-overlay">
+              <div className="modal-content">
+                <p className="popup-message">
+                  You need {lockedAchievement.required_score} points to unlock🔓!
+                </p>
+                <button onClick={() => setLockedAchievement(null)}>OK</button>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
