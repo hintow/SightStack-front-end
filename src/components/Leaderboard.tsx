@@ -15,6 +15,10 @@ const Leaderboard: React.FC = () => {
 
   const apiServer = 'https://sightstack-back-end.onrender.com';
 
+  const handleClose = () => {
+    document.dispatchEvent(new CustomEvent('toggleLeaderboard'));
+  };
+
   // 获取积分榜数据
   const fetchLeaderboard = async () => {
     try {
@@ -50,6 +54,7 @@ const Leaderboard: React.FC = () => {
   return (
     <div className="leaderboard">
       <h2>Leaderboard</h2>
+        <button className="close-button" onClick={handleClose}>×</button>
       <ul>
         {leaderboardData.map((user, index) => (
           <li key={index} className="leaderboard-item">
