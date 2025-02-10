@@ -21,16 +21,22 @@ useEffect(() => {
   const handleToggleSignUp = () => setShowSignUp(false);
   const handleToggleLogIn = () => setShowLogIn(false);
   const handleToggleUserInfo = () => setShowUserInfo(false); 
+  const handleToggleLeaderboard = () => setShowLeaderboard(false);
+  const handleToggleRules = () => setShowRules(false);
 
 
   document.addEventListener('toggleSignUp', handleToggleSignUp);
   document.addEventListener('toggleLogIn', handleToggleLogIn);
   document.addEventListener('toggleUserInfo', handleToggleUserInfo);
+  document.addEventListener('toggleLeaderboard', handleToggleLeaderboard);
+  document.addEventListener('toggleRules', handleToggleRules);
 
   return () => {
     document.removeEventListener('toggleSignUp', handleToggleSignUp);
     document.removeEventListener('toggleLogIn', handleToggleLogIn);
     document.removeEventListener('toggleUserInfo', handleToggleUserInfo);
+    document.removeEventListener('toggleLeaderboard', handleToggleLeaderboard);
+    document.removeEventListener('toggleRules', handleToggleRules);
   };
 }, []);  
 
