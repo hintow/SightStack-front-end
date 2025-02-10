@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Leaderboard.css';
 
-// 定义用户数据的类型
 interface User {
   childName: string;
   score: number;
@@ -19,24 +18,24 @@ const Leaderboard: React.FC = () => {
     document.dispatchEvent(new CustomEvent('toggleLeaderboard'));
   };
 
-  // 获取积分榜数据
-  const fetchLeaderboard = async () => {
-    try {
-      const response = await fetch(`${apiServer}/leaderboard`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch leaderboard data');
-      }
-      const data: User[] = await response.json();
-      setLeaderboardData(data);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   // 组件加载时调用 API
   useEffect(() => {
+    const fetchLeaderboard = async () => {
+      try {
+        const response = await fetch(`${apiServer}/leaderboard`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch leaderboard data');
+        }
+        const data: User[] = await response.json();
+        setLeaderboardData(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+      } finally {
+        setLoading(false);
+      }
+    };
+    
     fetchLeaderboard();
   }, []);
 

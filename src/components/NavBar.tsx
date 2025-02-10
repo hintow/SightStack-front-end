@@ -43,25 +43,25 @@ useEffect(() => {
   
   const toggleSignUp = () => {
     setShowSignUp(!showSignUp);
-    if (showLogIn) setShowLogIn(false); // Hide LogIn if SignUp is shown
+    if (showLogIn) setShowLogIn(false); 
   };
 
   const toggleLogIn = () => {
     setShowLogIn(!showLogIn);
-    if (showSignUp) setShowSignUp(false); // Hide SignUp if LogIn is shown
+    if (showSignUp) setShowSignUp(false); 
   };
 
   const toggleRules = () => {
     setShowRules(!showRules);
-    if (showSignUp) setShowSignUp(false); // Hide SignUp if Rules is shown
-    if (showLogIn) setShowLogIn(false); // Hide LogIn if Rules is shown
+    if (showSignUp) setShowSignUp(false); 
+    if (showLogIn) setShowLogIn(false);
   };
 
   const toggleLeaderboard = () => {
     setShowLeaderboard(!showLeaderboard);
-    if (showSignUp) setShowSignUp(false); // Hide SignUp if Leaderboard is shown
-    if (showLogIn) setShowLogIn(false); // Hide LogIn if Leaderboard is shown
-    if (showRules) setShowRules(false); // Hide Rules if Leaderboard is shown
+    if (showSignUp) setShowSignUp(false); 
+    if (showLogIn) setShowLogIn(false);
+    if (showRules) setShowRules(false); 
   };
 
     // Update Account click handler
