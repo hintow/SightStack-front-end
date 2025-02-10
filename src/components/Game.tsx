@@ -218,7 +218,7 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
       <div className="top-bar">
         <button onClick={startGame}>
           New Game
-          {isCompleted ? "New Game" : "Play"}
+          {/* {isCompleted ? "New Game" : "Play"} */}
         </button>
 
         <div className="score-display">
