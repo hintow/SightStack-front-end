@@ -217,6 +217,7 @@ const Game: React.FC<GameProps>  = ({ type, grade }) => {
     <div className="game">
       <div className="top-bar">
         <button onClick={startGame}>
+          New Game
           {isCompleted ? "New Game" : "Play"}
         </button>
 
